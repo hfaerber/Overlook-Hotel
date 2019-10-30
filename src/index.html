@@ -9,17 +9,34 @@
     </header>
   <main>
     <img src="./images/concierge.jpg" alt="concierge on phone behind desk">
-    <div class="div__button--container">
-    <button id="button__customer--login--js">
-      Customer Login
-    </button>
-    <button id="button__team--member--login--js">
-      Team Member Login
-    </button>
+    <div class="div_button-container">
+      <form>
+        <label for="customer-login">Customer Login</label>
+        <input type="text" id="customer-login" placeholder="Customer Login">
+        <label for="customer-password">Password</label>
+        <input type="password" id="customer-password">
+        <input type="submit" value="Login" id="submit_customer">
+      </form>
+
+
+      <button id="button_customer-login">
+        Customer Login
+      </button>
+
+      <form>
+        <label for="team-member-login">Team Member Login</label>
+        <input type="text" id="team-member-login" placeholder="Team Member Login">
+        <label for="team-member-password">Password</label>
+        <input type="password" id="team-member-password">
+        <input type="submit" value="Login" id="submit_team-member">
+      </form>
+
+      <button id="button_team-member-login">
+        Team Member Login
+      </button>
     </div>
   </main>
 
-    <!-- <img src="./images/turing-logo.png" alt="turing logo" height="100px" width="100px"> -->
 
     <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
   </body>

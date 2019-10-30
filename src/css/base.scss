@@ -21,7 +21,7 @@ main {
   display: flex;
 }
 
-.div__button--container {
+.div_button-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -40,4 +40,14 @@ button {
   &:focus {
     border: 2px solid blue;
   }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  margin: 10px;
+  padding: 10px;
 }
