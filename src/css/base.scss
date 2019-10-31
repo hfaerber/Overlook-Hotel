@@ -1,4 +1,19 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
+
+.clearfix:after {
+    content: ' ';
+    display: table;
+    clear: both;
+}
+
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+  // margin: 0;
+  // padding: 0;
+}
+
 $primary-background: black;
 $primary-font: #fff;
 
