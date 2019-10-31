@@ -6,7 +6,9 @@ import $ from 'jquery';
 
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
-
+import './User.js';
+import './Room.js';
+import './Booking.js';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/concierge.jpg'
 
@@ -23,7 +25,9 @@ console.log('This is the JavaScript entry file - your code begins here.');
 // ^^same for manager but with manager stuff
 
 // EVENT LISTENERS
-
+$('#button_customer-login').on('click', function() {
+    window.location = "./customer.html";
+  })
 
 // HANDLERS
 
