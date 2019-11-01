@@ -12,53 +12,51 @@ import './Booking.js';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/concierge.jpg'
 
-console.log('This is the JavaScript entry file - your code begins here.');
-
 // psuedocoding
-// event listener on customer login button that expands customer login form
-// event listener on team member login button that expands team member login form
-
-// event listener on customer submit button that checks if password === correct
-// and if username is valid with id
-// IF NOT  error message try again
-// IF CORRECT display customer page
-// ^^same for manager but with manager stuff
 
 // EVENT LISTENERS
 $('#button_guest-login').on('click', function() {
   $('#form_guest-login').toggleClass('hide');
   $('#button_team-member-login').toggleClass('hide');
-  // $('#button_guest-login').text('Oops! Take me back.')
+  $('#error_team-member-login').addClass('hide');
   })
 
 $('#button_team-member-login').on('click', function() {
   $('#form_team-member-login').toggleClass('hide');
   $('#button_guest-login').toggleClass('hide');
+  $('#error_team-member-login').addClass('hide');
   })
 
 $('#submit_guest').on('click', function(event) {
   event.preventDefault();
+  if ($('#guest-login').val().includes('customer') &&
+    $('#guest-password').val() === 'overlook2019') {
   window.location = "./customer.html";
+  } else {
+  $('#error_team-member-login').removeClass('hide');
+  }
 })
 
 $('#submit_team-member').on('click', function(event) {
   event.preventDefault();
-  if ($('#team-member-login').val() === 'manager') {
+  if ($('#team-member-login').val() === 'manager'
+    && $('#team-member-password').val() === 'overlook2019') {
     window.location = "./manager.html";
+  } else {
+    $('#error_team-member-login').removeClass('hide');
   }
 })
 
 // HANDLERS
 
-// do i need to worry about upper vs lowercase?
-function validateLogin() {
-  if ( $('#team-member-login').val() === 'manager' &&
-    $('#team-member-password').val() === 'overlook2019') {
-      return 'manager';
-  } else if ($('#guest-login').val().includes('guest') &&
-    $('#guest-password').val() === 'overlook2019') {
-      return 'guest';
-  } else {
-    return 'error'
-  }
-}
+// function validateLogin() {
+//   if ($('#guest-login').val().includes('customer') &&
+//     $('#guest-password').val() === 'overlook2019') {
+//       return 'manager';
+//   } else if   if ($('#team-member-login').val() === 'manager'
+//       && $('#team-member-password').val() === 'overlook2019') {
+//       return 'guest';
+//   } else {
+//     return 'error'
+//   }
+// }
