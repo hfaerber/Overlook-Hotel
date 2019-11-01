@@ -10,20 +10,20 @@
   <main>
     <img src="./images/concierge.jpg" alt="concierge on phone behind desk">
     <div class="div_button-container">
-      <form>
-        <label for="customer-login">Customer Login</label>
-        <input type="text" id="customer-login" placeholder="Customer Login">
-        <label for="customer-password">Password</label>
-        <input type="password" id="customer-password">
-        <input type="submit" value="Login" id="submit_customer">
+      <form class="hide" id="form_guest-login">
+        <label for="guest-login">Guest Login</label>
+        <input type="text" id="guest-login" placeholder="Guest Login">
+        <label for="guest-password">Password</label>
+        <input type="password" id="guest-password">
+        <input type="submit" value="Login" id="submit_guest">
       </form>
 
 
-      <button id="button_customer-login">
-        Customer Login
+      <button id="button_guest-login">
+        Guest Login
       </button>
 
-      <form>
+      <form class="hide" id="form_team-member-login">
         <label for="team-member-login">Team Member Login</label>
         <input type="text" id="team-member-login" placeholder="Team Member Login">
         <label for="team-member-password">Password</label>

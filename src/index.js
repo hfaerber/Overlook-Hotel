@@ -7,7 +7,7 @@ import $ from 'jquery';
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
 import './User.js';
-import './Room.js';
+import './Tapechart.js';
 import './Booking.js';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/concierge.jpg'
@@ -25,9 +25,28 @@ console.log('This is the JavaScript entry file - your code begins here.');
 // ^^same for manager but with manager stuff
 
 // EVENT LISTENERS
-$('#button_customer-login').on('click', function() {
-    window.location = "./customer.html";
+$('#button_guest-login').on('click', function() {
+  $('#form_guest-login').toggleClass('hide');
+  $('#button_team-member-login').toggleClass('hide');
+  // $('#button_guest-login').text('Oops! Take me back.')
   })
+
+$('#button_team-member-login').on('click', function() {
+  $('#form_team-member-login').toggleClass('hide');
+  $('#button_guest-login').toggleClass('hide');
+  })
+
+$('#submit_guest').on('click', function(event) {
+  event.preventDefault();
+  window.location = "./customer.html";
+})
+
+$('#submit_team-member').on('click', function(event) {
+  event.preventDefault();
+  if ($('#team-member-login').val() === 'manager') {
+    window.location = "./manager.html";
+  }
+})
 
 // HANDLERS
 
@@ -36,9 +55,9 @@ function validateLogin() {
   if ( $('#team-member-login').val() === 'manager' &&
     $('#team-member-password').val() === 'overlook2019') {
       return 'manager';
-  } else if ($('#customer-login').val().includes('customer') &&
-    $('#customer-password').val() === 'overlook2019') {
-      return 'customer';
+  } else if ($('#guest-login').val().includes('guest') &&
+    $('#guest-password').val() === 'overlook2019') {
+      return 'guest';
   } else {
     return 'error'
   }
