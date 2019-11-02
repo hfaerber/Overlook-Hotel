@@ -7,6 +7,7 @@ import bookingData from '../sampleData/sample-booking-data';
 
 import TapeChart from '../src/TapeChart';
 import User from '../src/User';
+import Booking from '../src/Booking';
 
 describe('User', () => {
 
@@ -17,6 +18,7 @@ describe('User', () => {
   });
 
   it('should take a single user info as arg', () => {
+    expect(user.name).to.equal("Dell Rath");
     expect(user.id).to.equal(7);
   })
 
@@ -41,6 +43,16 @@ describe('User', () => {
     user2.getMyBookings(tapeChart);
     user2.getMySpending(tapeChart);
     expect(user2.mySpending).to.equal(340.17);
+  })
+
+  it('should be able to make a new booking for themself', () => {
+    expect(user.makeBooking('2019/10/29', 5)).to.eql(
+      { id: Date.now(),
+      userID: 7,
+      date: "2019/10/29",
+      roomNumber: 5,
+      roomServiceCharges: [ ]
+      })
   })
 
 })

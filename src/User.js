@@ -1,4 +1,5 @@
 // import postBooking from './src/index.js'
+import Booking from '../src/Booking';
 
 class User {
   constructor(user) {
