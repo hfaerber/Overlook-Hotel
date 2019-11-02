@@ -2,16 +2,17 @@
 import Booking from '../src/Booking';
 
 class User {
-  constructor(user) {
+  constructor(user, tapeChart) {
     this.name = user.name;
     this.id = user.id;
-    this.myBookings = [];
-    this.mySpending = 0;
+    this.myBookings = this.getMyBookings(tapeChart);
+    this.mySpending = this.getMySpending(tapeChart);
   }
 
 getMyBookings(tapeChart) {
  this.myBookings = tapeChart.bookings.filter(booking =>
    booking.userID === this.id)
+   return this.myBookings;
 }
 
 getMySpending(tapeChart) {
@@ -23,6 +24,7 @@ getMySpending(tapeChart) {
     })
     return acc
   }, 0)
+  return this.mySpending;
 }
 
 // index.js when selects date, fire tapeChart.getAvailableRoomsByDate() and display
