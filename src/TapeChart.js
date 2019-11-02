@@ -43,8 +43,8 @@ filterAvailableRoomsByFeature(date, feature, spec) {
   return availableRoomsByDate.filter(room => room[feature] === spec);
 }
 
-findUserByName(userName) {
-  return this.users.filter(user => user.name === userName);
+findUser(metric, spec) {
+  return this.users.filter(user => user[metric] === spec);
 }
 
 }

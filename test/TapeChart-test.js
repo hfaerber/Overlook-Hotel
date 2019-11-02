@@ -344,7 +344,7 @@ describe('TapeChart', () => {
   })
 
   it('should be able to find user by name', () => {
-    expect(tapeChart.findUserByName("Dell Rath")).to.eql([{
+    expect(tapeChart.findUser("name", "Dell Rath")).to.eql([{
     id: 7,
     name: "Dell Rath"
     }])

@@ -14,7 +14,7 @@ describe('User', () => {
   let user, tapeChart;
   beforeEach(() => {
     tapeChart = new TapeChart(userData, roomData, bookingData)
-    user = new User(tapeChart.findUserByName("Dell Rath")[0])
+    user = new User(tapeChart.findUser("name", "Dell Rath")[0])
   });
 
   it('should take a single user info as arg', () => {
@@ -39,7 +39,7 @@ describe('User', () => {
     user.getMyBookings(tapeChart);
     user.getMySpending(tapeChart);
     expect(user.mySpending).to.equal(172.09);
-    let user2 = new User(tapeChart.findUserByName("Faustino Quitzon")[0]);
+    let user2 = new User(tapeChart.findUser("name", "Faustino Quitzon")[0]);
     user2.getMyBookings(tapeChart);
     user2.getMySpending(tapeChart);
     expect(user2.mySpending).to.equal(340.17);
