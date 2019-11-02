@@ -13,8 +13,7 @@ describe('User', () => {
   let user, tapeChart;
   beforeEach(() => {
     tapeChart = new TapeChart(userData, roomData, bookingData)
-    user = new User(tapeChart.findUserByName("Dell Rath")[0],
-      tapeChart.filterBookingsByMetric('userID', 7), roomData)
+    user = new User(tapeChart.findUserByName("Dell Rath")[0])
   });
 
   it('should take a single user info as arg', () => {
@@ -22,6 +21,8 @@ describe('User', () => {
   })
 
   it('should be able to see its own bookings', () => {
+    user.getMyBookings(tapeChart);
+
     expect(user.myBookings).to.eql([
       { id: 1572293130160,
       userID: 7,
@@ -33,10 +34,13 @@ describe('User', () => {
   })
 
   it('should be able to get its own total spending', () => {
-    expect(user.getMySpending()).to.equal(172.09)
-    user = new User(tapeChart.findUserByName("Faustino Quitzon")[0],
-      tapeChart.filterBookingsByMetric('userID', 9), roomData)
-    expect(user.getMySpending()).to.equal(340.17)
+    user.getMyBookings(tapeChart);
+    user.getMySpending(tapeChart);
+    expect(user.mySpending).to.equal(172.09);
+    let user2 = new User(tapeChart.findUserByName("Faustino Quitzon")[0]);
+    user2.getMyBookings(tapeChart);
+    user2.getMySpending(tapeChart);
+    expect(user2.mySpending).to.equal(340.17);
   })
 
 })
