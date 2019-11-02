@@ -14,6 +14,33 @@ import './images/concierge.jpg'
 
 // psuedocoding
 
+// FETCH
+let bookingData = fetch('http://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings')
+  .then(response => response.json())
+  .then(data => data.bookings)
+  .catch(error => console.log('bookingData', error));
+
+let roomData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms')
+  .then(response => response.json())
+  .then(data => data.rooms)
+  .catch(error => console.log('roomData', error));
+
+let userData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users')
+  .then(response => response.json())
+  .then(data => data.users)
+  .catch(error => console.log('userData', error));
+
+Promise.all([bookingData, roomData, userData]).then((promise) => {
+  bookingData = promise[0];
+  roomData = promise[1];
+  userData = promise[2];
+}).then(() => {
+  // instantiate then fire all the display stuff with 'init' function
+  console.log('instantiate');
+  // does promise all need its own .catch?
+}).catch(error => console.log('promiseALL', error))
+
+
 // EVENT LISTENERS
 $('#button_guest-login').on('click', function() {
   $('#form_guest-login').toggleClass('hide');
