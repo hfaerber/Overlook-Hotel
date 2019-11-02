@@ -8,7 +8,7 @@ class TapeChart {
 getAvailableRoomsByDate(date) {
     let availableByDate = this.rooms.reduce((acc, room) => {
       let bookingsByRoom = this.bookings.filter(booking =>
-        booking.roomNumber === room.number);
+        Number(booking.roomNumber) === room.number);
       if (!bookingsByRoom.some(booking => booking.date === date)) {
         acc.push(room);
       }
@@ -30,7 +30,7 @@ getDaysRevenue(date) {
   let bookingsByDate = this.getBookingsByDate(date);
   return bookingsByDate.reduce((acc, booking) => {
     this.rooms.forEach(room => {
-      if (room.number === booking.roomNumber) {
+      if (room.number === Number(booking.roomNumber)) {
         acc += room.costPerNight;
       }
     })
