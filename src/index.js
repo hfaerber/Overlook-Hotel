@@ -3,7 +3,6 @@
 
 // An example of how you import jQuery into a JS file if you use jQuery in that file
 import $ from 'jquery';
-
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
 import User from './User.js';
@@ -62,6 +61,18 @@ Promise.all([bookingData, roomData, userData]).then((promise) => {
   loadPageDisplay();
 }).catch(error => console.log('promiseALL', error))
 
+//  POST
+
+// post user.booking()
+// function postBooking() {
+//   post request here
+//   {user.makeBooking();}
+// }
+// .then(re-fetch updated data)
+// the successful response may already include the updated data that i could use
+// program - post map to download to see it
+// .catch(display error message if fails)
+
 
 // EVENT LISTENERS
 $('#button_guest-login').on('click', function() {
@@ -96,9 +107,6 @@ $('#submit_team-member').on('click', function(event) {
   }
 })
 
-// $('.div_dashboard').on('click', function() {
-//   console.log('after', bookingData)
-// })
 
 // HANDLERS
 
@@ -109,6 +117,26 @@ function loadPageDisplay() {
 }
 
 // TEMPORARY CODE HOARDING
+
+// APPENDING AVAILABLE ROOMS TO DOM WITH DATASET ROOM NUMBER
+// $('.test-click').on('click', function() {
+//   tapeChart.getAvailableRoomsByDate(today).forEach(room => {
+//     $('#guest-dashboard-bookings').append(`<div class="div_available-room" data-roomnumber="${room.number}"<p>Room ${room.number}</p><p>${room.numBeds} ${room.bedSize}</p></div>`)
+//   })
+// })
+
+// USING JQUERY EVENT BUBBLING TO GET ROOM NUMBER FROM SELECTED ROOM AND FIRE MAKEBOOKING FUNCTION
+// // on click to select room to book:
+// $('.div_dashboard').on('click', '.div_available-room', function(event) {
+//   user.makeBooking(selectedDate, event.target.dataset.roomnumber)
+//   console.log('test', 'test');
+//   console.log(event.target.dataset.roomnumber);
+//   // gonna need to save variable to capture the selected date somewhere
+// })
+
+
+
+
 // tapeChart.getAvailableRoomsByDate(today).forEach(room => {
 //   $('#manager-dashboard-availability').append(`<div class="div_available-room"<p>Room ${room.number}</p><p>${room.numBeds} ${room.bedSize}</p></div>`)
 // })
