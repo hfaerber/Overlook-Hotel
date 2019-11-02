@@ -10,8 +10,6 @@
 *:after,
 *:before {
   box-sizing: border-box;
-  // margin: 0;
-  // padding: 0;
 }
 
 $login-background: black;
@@ -29,14 +27,45 @@ $primary-font: black;
   color: $primary-font;
 }
 
-.customer-page-body {
+.body_guest-page {
   @extend .manager-page-body;
+  display: grid;
+  grid-template-areas:
+    "aside header"
+    "aside main";
+  grid-template-columns: 30% 70%;
+  grid-template-rows: 20% 80%;
 }
 
 header {
   text-align: center;
-  font-size: 2em;
 }
+
+h1 {
+  font-size: 3em;
+}
+
+.header_guest-page {
+  border: 2px solid pink;
+  float: right;
+  grid-area: header;
+  h1,
+  h2 {
+    margin: 20px;
+  }
+}
+
+.aside_guest-page{
+  grid-area: aside;
+}
+
+.main_guest-page {
+  border: 2px solid black;
+  float: right;
+  position: relative;
+  grid-area: main;
+}
+
 
 img {
   width: 75%;
@@ -85,7 +114,6 @@ input {
 .div_dashboard {
   display: flex;
   flex-direction: column;
-  width: 30%;
   text-align: center;
   border: 2px solid lightblue;
   padding: 15px;
