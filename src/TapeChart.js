@@ -35,7 +35,7 @@ getDaysRevenue(date) {
       }
     })
     return acc;
-  }, 0)
+  }, 0).toFixed(2);
 }
 
 filterAvailableRoomsByFeature(date, feature, spec) {
