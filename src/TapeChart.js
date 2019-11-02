@@ -22,25 +22,29 @@ getOccupancy(date) {
     / this.rooms.length * 100);
 }
 
-getBookingsByDate(date) {
-  return this.bookings.filter(booking => booking.date === date);
+filterBookingsByMetric(metric, spec) {
+  return this.bookings.filter(booking => booking[metric] === spec);
 }
 
-getDaysRevenue(date) {
-  let bookingsByDate = this.getBookingsByDate(date);
-  return bookingsByDate.reduce((acc, booking) => {
+getDaysRevenue(metric, spec) {
+  let bookingsByDate = this.filterBookingsByMetric(metric, spec);
+  return Number(bookingsByDate.reduce((acc, booking) => {
     this.rooms.forEach(room => {
       if (room.number === Number(booking.roomNumber)) {
         acc += room.costPerNight;
       }
     })
     return acc;
-  }, 0).toFixed(2);
+  }, 0).toFixed(2));
 }
 
 filterAvailableRoomsByFeature(date, feature, spec) {
   let availableRoomsByDate = this.getAvailableRoomsByDate(date);
   return availableRoomsByDate.filter(room => room[feature] === spec);
+}
+
+findUserByName(userName) {
+  return this.users.filter(user => user.name === userName);
 }
 
 }

@@ -195,8 +195,8 @@ describe('TapeChart', () => {
   })
 
   it('should get all bookings for a given date', () => {
-    expect(tapeChart.getBookingsByDate('2019/06/15')).to.eql([]);
-    expect(tapeChart.getBookingsByDate('2019/11/22')).to.eql([
+    expect(tapeChart.filterBookingsByMetric('date', '2019/06/15')).to.eql([]);
+    expect(tapeChart.filterBookingsByMetric('date', '2019/11/22')).to.eql([
       {
       id: 1572293130160,
       userID: 8,
@@ -219,7 +219,7 @@ describe('TapeChart', () => {
       roomServiceCharges: [ ]
       }
     ]);
-    expect(tapeChart.getBookingsByDate('2019/12/15')).to.eql([
+    expect(tapeChart.filterBookingsByMetric('date', '2019/12/15')).to.eql([
       {
       id: 1572293130160,
       userID: 26,
@@ -231,9 +231,9 @@ describe('TapeChart', () => {
   })
 
   it('should calculate total revenue for a given date', () => {
-    expect(tapeChart.getDaysRevenue('2019/06/15')).to.equal(0);
-    expect(tapeChart.getDaysRevenue('2019/11/22')).to.equal(820.05);
-    expect(tapeChart.getDaysRevenue('2019/12/15')).to.equal(477.38);
+    expect(tapeChart.getDaysRevenue('date', '2019/06/15')).to.equal(0.00);
+    expect(tapeChart.getDaysRevenue('date', '2019/11/22')).to.equal(820.05);
+    expect(tapeChart.getDaysRevenue('date', '2019/12/15')).to.equal(477.38);
   })
 
   it('should filter available rooms for a given date by feature', () => {
@@ -341,6 +341,24 @@ describe('TapeChart', () => {
       ]);
     expect(tapeChart.filterAvailableRoomsByFeature
       ('2019/11/22', 'bidet', false).length).to.equal(14);
+  })
+
+  it('should be able to find user by name', () => {
+    expect(tapeChart.findUserByName("Dell Rath")).to.eql([{
+    id: 7,
+    name: "Dell Rath"
+    }])
+  })
+
+  it('should be able to filter bookings by given user', () => {
+    expect(tapeChart.filterBookingsByMetric('userID', 7)).to.eql([
+      { id: 1572293130160,
+      userID: 7,
+      date: "2019/11/01",
+      roomNumber: 12,
+      roomServiceCharges: [ ]
+      }
+    ])
   })
 
 })
