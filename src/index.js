@@ -16,6 +16,7 @@ import './images/concierge.jpg'
 let user;
 let booking;
 let tapeChart;
+let userLogin;
 
 let today = new Date();
 findTodaysDate();
@@ -58,7 +59,8 @@ Promise.all([bookingData, roomData, userData]).then((promise) => {
 }).then(() => {
   // instantiate then fire all the display stuff with 'init' function
   tapeChart = new TapeChart(userData, roomData, bookingData);
-  loadPageDisplay();
+  loadManagerPageDisplay();
+  loadGuestPageDisplay();
 }).catch(error => console.log('promiseALL', error))
 
 //  POST
@@ -91,7 +93,9 @@ $('#submit_guest').on('click', function(event) {
   event.preventDefault();
   if ($('#guest-login').val().includes('customer') &&
     $('#guest-password').val() === 'overlook2019') {
-  window.location = "./customer.html";
+      userLogin = $('#guest-login').val();
+      localStorage.setItem('userLogin', userLogin);
+      window.location = "./customer.html";
   } else {
   $('#error_team-member-login').removeClass('hide');
   }
@@ -110,10 +114,31 @@ $('#submit_team-member').on('click', function(event) {
 
 // HANDLERS
 
-function loadPageDisplay() {
+function loadManagerPageDisplay() {
   $('#manager-dashboard-occupancy').text(`${tapeChart.getOccupancy(today)}%`);
   $('#manager-dashboard-revenue').text(`$${tapeChart.getDaysRevenue(today)}`);
   $('#manager-dashboard-availability').text(`${tapeChart.getAvailableRoomsByDate(today).length}`);
+}
+
+function loadGuestPageDisplay() {
+  userLogin = localStorage.getItem('userLogin');
+  let foundUser = tapeChart.findUser("id", isolateUserID(userLogin));
+  user = new User(foundUser[0], tapeChart);
+  $('.span_user-name').text(`${user.name}`);
+  $('.span_user-first-name').text(`${user.name.split(' ')[0]}`);
+  $('#guest-dashboard-spending').text(`${user.mySpending} points`);
+  console.log(user.myBookings);
+  user.myBookings.forEach(booking => {
+    $('#guest-dashboard-bookings').append(`
+      <div class="div_guest-bookings"><h4>Confirmation Number: ${booking.id}</h4>
+      <p>${booking.date}</p><p>Room Number: ${booking.roomNumber}</p>
+      </div>`)
+  })
+}
+
+function isolateUserID(userLogin) {
+  let splitUserLogin = userLogin.split('r');
+  return Number(splitUserLogin[1]);
 }
 
 // TEMPORARY CODE HOARDING

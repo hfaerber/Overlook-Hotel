@@ -98,7 +98,13 @@ input {
   border-radius: 4px;
 }
 
-.div_available-room {
+.guest-dashboard-booking-list {
+  height: 90vh;
+  overflow: scroll;
+}
+
+.div_available-room,
+.div_guest-bookings {
   border: 2px solid black;
   padding: 10px;
   margin: 5px;
