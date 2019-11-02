@@ -7,7 +7,7 @@ import $ from 'jquery';
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
 import './User.js';
-import './Room.js';
+import './Tapechart.js';
 import './Booking.js';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/concierge.jpg'
