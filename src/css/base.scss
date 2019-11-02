@@ -14,12 +14,23 @@
   // padding: 0;
 }
 
-$primary-background: black;
-$primary-font: #fff;
+$login-background: black;
+$login-font: #fff;
+$primary-background: white;
+$primary-font: black;
 
-body {
+.login-page-body {
+  background-color: $login-background;
+  color: $login-font;
+}
+
+.manager-page-body {
   background-color: $primary-background;
   color: $primary-font;
+}
+
+.customer-page-body {
+  @extend .manager-page-body;
 }
 
 header {
@@ -65,4 +76,28 @@ form {
 input {
   margin: 10px;
   padding: 10px;
+}
+
+.error-message {
+  color: red;
+}
+
+.div_dashboard {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  text-align: center;
+  border: 2px solid lightblue;
+  padding: 15px;
+  border-radius: 4px;
+}
+
+.section_dashboard {
+  border: 2px solid lightgreen;
+  padding: 15px;
+  border-radius: 4px;
+}
+
+.hide {
+  display: none;
 }

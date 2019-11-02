@@ -12,34 +12,78 @@ import './Booking.js';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/concierge.jpg'
 
-console.log('This is the JavaScript entry file - your code begins here.');
-
 // psuedocoding
-// event listener on customer login button that expands customer login form
-// event listener on team member login button that expands team member login form
 
-// event listener on customer submit button that checks if password === correct
-// and if username is valid with id
-// IF NOT  error message try again
-// IF CORRECT display customer page
-// ^^same for manager but with manager stuff
+// FETCH
+let bookingData = fetch('http://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings')
+  .then(response => response.json())
+  .then(data => data.bookings)
+  .catch(error => console.log('bookingData', error));
+
+let roomData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms')
+  .then(response => response.json())
+  .then(data => data.rooms)
+  .catch(error => console.log('roomData', error));
+
+let userData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users')
+  .then(response => response.json())
+  .then(data => data.users)
+  .catch(error => console.log('userData', error));
+
+Promise.all([bookingData, roomData, userData]).then((promise) => {
+  bookingData = promise[0];
+  roomData = promise[1];
+  userData = promise[2];
+}).then(() => {
+  // instantiate then fire all the display stuff with 'init' function
+  console.log('instantiate');
+  // does promise all need its own .catch?
+}).catch(error => console.log('promiseALL', error))
+
 
 // EVENT LISTENERS
-$('#button_customer-login').on('click', function() {
-    window.location = "./customer.html";
+$('#button_guest-login').on('click', function() {
+  $('#form_guest-login').toggleClass('hide');
+  $('#button_team-member-login').toggleClass('hide');
+  $('#error_team-member-login').addClass('hide');
   })
+
+$('#button_team-member-login').on('click', function() {
+  $('#form_team-member-login').toggleClass('hide');
+  $('#button_guest-login').toggleClass('hide');
+  $('#error_team-member-login').addClass('hide');
+  })
+
+$('#submit_guest').on('click', function(event) {
+  event.preventDefault();
+  if ($('#guest-login').val().includes('customer') &&
+    $('#guest-password').val() === 'overlook2019') {
+  window.location = "./customer.html";
+  } else {
+  $('#error_team-member-login').removeClass('hide');
+  }
+})
+
+$('#submit_team-member').on('click', function(event) {
+  event.preventDefault();
+  if ($('#team-member-login').val() === 'manager'
+    && $('#team-member-password').val() === 'overlook2019') {
+    window.location = "./manager.html";
+  } else {
+    $('#error_team-member-login').removeClass('hide');
+  }
+})
 
 // HANDLERS
 
-// do i need to worry about upper vs lowercase?
-function validateLogin() {
-  if ( $('#team-member-login').val() === 'manager' &&
-    $('#team-member-password').val() === 'overlook2019') {
-      return 'manager';
-  } else if ($('#customer-login').val().includes('customer') &&
-    $('#customer-password').val() === 'overlook2019') {
-      return 'customer';
-  } else {
-    return 'error'
-  }
-}
+// function validateLogin() {
+//   if ($('#guest-login').val().includes('customer') &&
+//     $('#guest-password').val() === 'overlook2019') {
+//       return 'manager';
+//   } else if   if ($('#team-member-login').val() === 'manager'
+//       && $('#team-member-password').val() === 'overlook2019') {
+//       return 'guest';
+//   } else {
+//     return 'error'
+//   }
+// }
