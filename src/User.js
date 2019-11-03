@@ -16,14 +16,14 @@ class User {
   }
 
   getMySpending(tapeChart) {
-    this.mySpending = this.myBookings.reduce((acc, booking) => {
+    this.mySpending = Number(this.myBookings.reduce((acc, booking) => {
       tapeChart.rooms.forEach(room => {
         if (booking.roomNumber === room.number) {
           acc += room.costPerNight;
         }
       })
       return acc
-    }, 0).toFixed();
+    }, 0).toFixed());
     return this.mySpending;
   }
 
