@@ -64,6 +64,7 @@ h1 {
   float: right;
   position: relative;
   grid-area: main;
+  padding: 15px;
 }
 
 
@@ -107,7 +108,8 @@ input {
   padding: 10px;
 }
 
-.error-message {
+.error-message,
+.error-message-no-rooms {
   color: red;
 }
 

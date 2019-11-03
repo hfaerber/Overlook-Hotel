@@ -53,16 +53,10 @@ makeBooking (date, roomNumber) {
 // update user stats
 
 
-
-// Could have a getMyBookings method that takes TapeChart
-// instantiation as an arg then does the calculations here
-// within User which might be a little more SRP
-
 // could have a method for update bookings for after posting
 // date.  This could be in tapeChart and update the tapeCharts
 // this.bookings property then reinvoke the user's getMyBookings
 // method to update the users myBookings property.
-
 
 }
 
