@@ -118,9 +118,12 @@ $('#submit_team-member').on('click', function(event) {
 })
 
 $('#submit_book-room-button').on('click', function() {
+  $('.div_available-rooms').remove();
   selectedDate = formatSelectedDate($('#select-date').val());
+  let roomType = $('#select-room-type').val();
+  console.log(roomType);
   if (selectedDate !== '' ) {
-    displayAvailableRooms(selectedDate);
+    displayAvailableRooms(selectedDate, roomType);
   } else {
     $('#submit_book-room-button, .button_new-search, .error_no-rooms')
       .toggleClass('hide');
@@ -139,6 +142,7 @@ $('.main_guest-page').on('click', '.div_available-rooms', function(event) {
   let postBody = user.makeBooking(selectedDate,
     event.target.closest('.div_available-rooms').dataset.roomnumber);
   postNewBooking(postBody);
+  $(event.target.closest('.div_available-rooms')).remove();
 })
 
 // HANDLERS
@@ -170,14 +174,20 @@ function isolateUserID(userLogin) {
   return Number(splitUserLogin[1]);
 }
 
-function displayAvailableRooms(date) {
-  tapeChart.getAvailableRooms(date).forEach(room => {
-    $('.main_guest-page').append(
-      `<div class="div_available-rooms" data-roomnumber="${room.number}">
-      <h4>Room Type: ${room.roomType}</h4>
-      <p>Beds: ${room.numBeds} ${room.bedSize} size</p>
-      <p>Room Number: ${room.number}</p>
-      <p>Cost: $${room.costPerNight}</p>
-      </div>`)
-  })
+function displayAvailableRooms(date, roomType) {
+  let availableRooms = tapeChart.getAvailableRooms(date, roomType);
+  if (availableRooms.length === 0) {
+    $('#submit_book-room-button, .button_new-search, .error_no-rooms')
+      .toggleClass('hide')
+  } else {
+    availableRooms.forEach(room => {
+      $('.main_guest-page').append(
+        `<div class="div_available-rooms" data-roomnumber="${room.number}">
+        <h4>Room Type: ${room.roomType}</h4>
+        <p>Beds: ${room.numBeds} ${room.bedSize} size</p>
+        <p>Room Number: ${room.number}</p>
+        <p>Cost: $${room.costPerNight}</p>
+        </div>`)
+    })
+  }
 }
