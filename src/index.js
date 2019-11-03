@@ -34,6 +34,10 @@ function findTodaysDate() {
   today = `${yyyy}/${mm}/${dd}`;
 }
 
+function formatSelectedDate(date) {
+  let regex = /-/gi;
+  return date.replace(regex, '/')
+}
 
 // FETCH
 let bookingData = fetch('http://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings')
@@ -111,13 +115,32 @@ $('#submit_team-member').on('click', function(event) {
   }
 })
 
+$('#submit_book-room-button').on('click', function() {
+  let selectedDate = formatSelectedDate($('#select-date').val());
+  if (selectedDate !== '' ) {
+    console.log('valid');
+  } else {
+    $('#submit_book-room-button, .button_new-search, .error_no-rooms')
+      .toggleClass('hide');
+  }
+})
+
+
+$('.button_new-search').on('click', function() {
+  $('#select-date').val('');
+  $('#select-room-type').val('any');
+  $('#submit_book-room-button, .button_new-search, .error_no-rooms')
+    .toggleClass('hide');
+})
+
 
 // HANDLERS
 
 function loadManagerPageDisplay() {
   $('#manager-dashboard-occupancy').text(`${tapeChart.getOccupancy(today)}%`);
   $('#manager-dashboard-revenue').text(`$${tapeChart.getDaysRevenue(today)}`);
-  $('#manager-dashboard-availability').text(`${tapeChart.getAvailableRoomsByDate(today).length}`);
+  $('#manager-dashboard-availability').text
+    (`${tapeChart.getAvailableRoomsByDate(today).length}`);
 }
 
 function loadGuestPageDisplay() {

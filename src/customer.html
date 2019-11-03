@@ -24,7 +24,7 @@
       <h2>Book A Room</h2>
       <label for="select-date">Select Date:</label>
       <input type="date" id="select-date" name="select-date-to-book"
-        value="YYYY-MM-DD">
+        value="">
       <!-- </br> -->
       <label for="select-room-type">Room Type:</label>
       <select class="select_room-type-picker" name="room-types"
@@ -36,9 +36,13 @@
         <option value="single room">Single Room</option>
       </select>
       </br>
-      <input type="submit" value="Find A Room">
-      <p class="error-message-no-rooms">Our apologies, there are no rooms available for the date select.</p>
-      <p class="error-message-no-rooms">Please select another date to stay with us.</p>
+      <input class="submit_book-room" type="submit" value="Find A Room"
+        id="submit_book-room-button">
+      <button class="button_new-search hide" id="button_new-search-guest">
+        New Search
+      </button>
+      <p class="error_no-rooms hide">Our apologies, there are no rooms available for the date select.</p>
+      <p class="error_no-rooms hide">Please select another date to stay with us.</p>
     </main>
   </body>
 </html>

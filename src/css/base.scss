@@ -98,6 +98,10 @@ button {
   }
 }
 
+.button_new-search {
+  width: 20%;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -109,7 +113,7 @@ input {
 }
 
 .error-message,
-.error-message-no-rooms {
+.error_no-rooms {
   color: red;
 }
 
