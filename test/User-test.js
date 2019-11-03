@@ -38,20 +38,20 @@ describe('User', () => {
   it('should be able to get its own total spending', () => {
     user.getMyBookings(tapeChart);
     user.getMySpending(tapeChart);
-    expect(user.mySpending).to.equal(172.09);
-    let user2 = new User(tapeChart.findUser("name", "Faustino Quitzon")[0], tapeChart);
+    expect(user.mySpending).to.equal(172);
+    let user2 = new User(tapeChart.findUser
+      ("name", "Faustino Quitzon")[0], tapeChart);
     user2.getMyBookings(tapeChart);
     user2.getMySpending(tapeChart);
-    expect(user2.mySpending).to.equal(340.17);
+    expect(user2.mySpending).to.equal(340);
   })
 
   it('should be able to make a new booking for themself', () => {
     expect(user.makeBooking('2019/10/29', 5)).to.eql(
-      { id: Date.now(),
+      {
       userID: 7,
       date: "2019/10/29",
       roomNumber: 5,
-      roomServiceCharges: [ ]
       })
   })
 

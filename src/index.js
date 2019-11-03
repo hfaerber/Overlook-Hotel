@@ -11,12 +11,12 @@ import Booking from './Booking.js';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/concierge.jpg'
 
-// psuedocoding
 // VARIABLE DECLARATIONS
 let user;
 let booking;
 let tapeChart;
 let userLogin;
+let selectedDate;
 
 let today = new Date();
 findTodaysDate();
@@ -34,60 +34,66 @@ function findTodaysDate() {
   today = `${yyyy}/${mm}/${dd}`;
 }
 
+function formatSelectedDate(date) {
+  let regex = /-/gi;
+  return date.replace(regex, '/')
+}
 
 // FETCH
-let bookingData = fetch('http://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings')
+let bookingData =
+  fetch('http://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings')
   .then(response => response.json())
   .then(data => data.bookings)
   .catch(error => console.log('bookingData', error));
 
-let roomData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms')
+let roomData =
+  fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms')
   .then(response => response.json())
   .then(data => data.rooms)
   .catch(error => console.log('roomData', error));
 
-let userData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users')
+let userData =
+  fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users')
   .then(response => response.json())
   .then(data => data.users)
   .catch(error => console.log('userData', error));
-
 
 Promise.all([bookingData, roomData, userData]).then((promise) => {
   bookingData = promise[0];
   roomData = promise[1];
   userData = promise[2];
 }).then(() => {
-  // instantiate then fire all the display stuff with 'init' function
   tapeChart = new TapeChart(userData, roomData, bookingData);
   loadManagerPageDisplay();
   loadGuestPageDisplay();
 }).catch(error => console.log('promiseALL', error))
 
 //  POST
-
-// post user.booking()
-// function postBooking() {
-//   post request here
-//   {user.makeBooking();}
-// }
-// .then(re-fetch updated data)
-// the successful response may already include the updated data that i could use
-// program - post map to download to see it
-// .catch(display error message if fails)
-
+function postNewBooking(postBody) {
+  fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings',
+  {
+    method: 'POST',
+    headers: {
+      'Content-Type': "application/json"
+    },
+    body: JSON.stringify(postBody)
+  })
+  .then(response => console.log('GREATSUCCESS!', response))
+  .catch(error => console.log('postError', error))
+}
 
 // EVENT LISTENERS
 $('#button_guest-login').on('click', function() {
   $('#form_guest-login').toggleClass('hide');
   $('#button_team-member-login').toggleClass('hide');
   $('#error_team-member-login').addClass('hide');
-  })
+})
 
 $('#button_team-member-login').on('click', function() {
   $('#form_team-member-login').toggleClass('hide');
   $('#button_guest-login').toggleClass('hide');
   $('#error_team-member-login').addClass('hide');
-  })
+})
 
 $('#submit_guest').on('click', function(event) {
   event.preventDefault();
@@ -97,7 +103,7 @@ $('#submit_guest').on('click', function(event) {
       localStorage.setItem('userLogin', userLogin);
       window.location = "./customer.html";
   } else {
-  $('#error_team-member-login').removeClass('hide');
+    $('#error_team-member-login').removeClass('hide');
   }
 })
 
@@ -111,13 +117,41 @@ $('#submit_team-member').on('click', function(event) {
   }
 })
 
+$('#submit_book-room-button').on('click', function() {
+  $('.div_available-rooms').remove();
+  selectedDate = formatSelectedDate($('#select-date').val());
+  let roomType = $('#select-room-type').val();
+  console.log(roomType);
+  if (selectedDate !== '' ) {
+    displayAvailableRooms(selectedDate, roomType);
+  } else {
+    $('#submit_book-room-button, .button_new-search, .error_no-rooms')
+      .toggleClass('hide');
+  }
+})
+
+$('.button_new-search').on('click', function() {
+  $('#select-date').val('');
+  $('#select-room-type').val('any');
+  $('#submit_book-room-button, .button_new-search, .error_no-rooms')
+    .toggleClass('hide');
+})
+
+$('.main_guest-page').on('click', '.div_available-rooms', function(event) {
+  event.preventDefault();
+  let postBody = user.makeBooking(selectedDate,
+    event.target.closest('.div_available-rooms').dataset.roomnumber);
+  postNewBooking(postBody);
+  $(event.target.closest('.div_available-rooms')).remove();
+})
 
 // HANDLERS
 
 function loadManagerPageDisplay() {
   $('#manager-dashboard-occupancy').text(`${tapeChart.getOccupancy(today)}%`);
   $('#manager-dashboard-revenue').text(`$${tapeChart.getDaysRevenue(today)}`);
-  $('#manager-dashboard-availability').text(`${tapeChart.getAvailableRoomsByDate(today).length}`);
+  $('#manager-dashboard-availability').text
+    (`${tapeChart.getAvailableRooms(today).length}`);
 }
 
 function loadGuestPageDisplay() {
@@ -127,7 +161,6 @@ function loadGuestPageDisplay() {
   $('.span_user-name').text(`${user.name}`);
   $('.span_user-first-name').text(`${user.name.split(' ')[0]}`);
   $('#guest-dashboard-spending').text(`${user.mySpending} points`);
-  console.log(user.myBookings);
   user.myBookings.forEach(booking => {
     $('#guest-dashboard-bookings').append(`
       <div class="div_guest-bookings"><h4>Confirmation Number: ${booking.id}</h4>
@@ -141,38 +174,20 @@ function isolateUserID(userLogin) {
   return Number(splitUserLogin[1]);
 }
 
-// TEMPORARY CODE HOARDING
-
-// APPENDING AVAILABLE ROOMS TO DOM WITH DATASET ROOM NUMBER
-// $('.test-click').on('click', function() {
-//   tapeChart.getAvailableRoomsByDate(today).forEach(room => {
-//     $('#guest-dashboard-bookings').append(`<div class="div_available-room" data-roomnumber="${room.number}"<p>Room ${room.number}</p><p>${room.numBeds} ${room.bedSize}</p></div>`)
-//   })
-// })
-
-// USING JQUERY EVENT BUBBLING TO GET ROOM NUMBER FROM SELECTED ROOM AND FIRE MAKEBOOKING FUNCTION
-// // on click to select room to book:
-// $('.div_dashboard').on('click', '.div_available-room', function(event) {
-//   user.makeBooking(selectedDate, event.target.dataset.roomnumber)
-//   console.log('test', 'test');
-//   console.log(event.target.dataset.roomnumber);
-//   // gonna need to save variable to capture the selected date somewhere
-// })
-
-
-
-
-// tapeChart.getAvailableRoomsByDate(today).forEach(room => {
-//   $('#manager-dashboard-availability').append(`<div class="div_available-room"<p>Room ${room.number}</p><p>${room.numBeds} ${room.bedSize}</p></div>`)
-// })
-// function validateLogin() {
-//   if ($('#guest-login').val().includes('customer') &&
-//     $('#guest-password').val() === 'overlook2019') {
-//       return 'manager';
-//   } else if   if ($('#team-member-login').val() === 'manager'
-//       && $('#team-member-password').val() === 'overlook2019') {
-//       return 'guest';
-//   } else {
-//     return 'error'
-//   }
-// }
+function displayAvailableRooms(date, roomType) {
+  let availableRooms = tapeChart.getAvailableRooms(date, roomType);
+  if (availableRooms.length === 0) {
+    $('#submit_book-room-button, .button_new-search, .error_no-rooms')
+      .toggleClass('hide')
+  } else {
+    availableRooms.forEach(room => {
+      $('.main_guest-page').append(
+        `<div class="div_available-rooms" data-roomnumber="${room.number}">
+        <h4>Room Type: ${room.roomType}</h4>
+        <p>Beds: ${room.numBeds} ${room.bedSize} size</p>
+        <p>Room Number: ${room.number}</p>
+        <p>Cost: $${room.costPerNight}</p>
+        </div>`)
+    })
+  }
+}
