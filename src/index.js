@@ -147,7 +147,7 @@ function loadManagerPageDisplay() {
   $('#manager-dashboard-occupancy').text(`${tapeChart.getOccupancy(today)}%`);
   $('#manager-dashboard-revenue').text(`$${tapeChart.getDaysRevenue(today)}`);
   $('#manager-dashboard-availability').text
-    (`${tapeChart.getAvailableRoomsByDate(today).length}`);
+    (`${tapeChart.getAvailableRooms(today).length}`);
 }
 
 function loadGuestPageDisplay() {
@@ -171,7 +171,7 @@ function isolateUserID(userLogin) {
 }
 
 function displayAvailableRooms(date) {
-  tapeChart.getAvailableRoomsByDate(date).forEach(room => {
+  tapeChart.getAvailableRooms(date).forEach(room => {
     $('.main_guest-page').append(
       `<div class="div_available-rooms" data-roomnumber="${room.number}">
       <h4>Room Type: ${room.roomType}</h4>
