@@ -3,7 +3,7 @@ const expect = chai.expect;
 
 import Booking from '../src/Booking';
 
-describe('User', () => {
+describe('Booking', () => {
 
   let booking;
   let userID = 7;
@@ -19,7 +19,4 @@ describe('User', () => {
     expect(booking.roomNumber).to.equal(roomNumber);
   })
 
-  it('should have unique booking id', () => {
-    expect(booking.id.toString().length).to.equal(13);
-  })
 })

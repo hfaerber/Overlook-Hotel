@@ -39,7 +39,8 @@ describe('User', () => {
     user.getMyBookings(tapeChart);
     user.getMySpending(tapeChart);
     expect(user.mySpending).to.equal(172.09);
-    let user2 = new User(tapeChart.findUser("name", "Faustino Quitzon")[0], tapeChart);
+    let user2 = new User(tapeChart.findUser
+      ("name", "Faustino Quitzon")[0], tapeChart);
     user2.getMyBookings(tapeChart);
     user2.getMySpending(tapeChart);
     expect(user2.mySpending).to.equal(340.17);
