@@ -55,6 +55,10 @@ class TapeChart {
     return this.users.filter(user => user[metric] === spec);
   }
 
+// METHODS THAT MAYBE SHOULD BE IN A MANAGER CLASS IF I REFACTOR TO INCLUDE ONE
+
+
+
 }
 
 export default TapeChart;

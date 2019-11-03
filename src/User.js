@@ -1,6 +1,3 @@
-// import postBooking from './src/index.js'
-import Booking from '../src/Booking';
-
 class User {
   constructor(user, tapeChart) {
     this.name = user.name;
@@ -29,8 +26,7 @@ class User {
 
   makeBooking (date, roomNumber) {
     let numberRoomNumber = Number(roomNumber);
-    let booking = new Booking(this.id, date, numberRoomNumber);
-    return booking;
+    return { userID: this.id, date: date, roomNumber: numberRoomNumber};
   }
 
 }

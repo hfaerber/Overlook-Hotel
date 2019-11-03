@@ -7,7 +7,6 @@ import $ from 'jquery';
 import './css/base.scss';
 import User from './User.js';
 import TapeChart from './TapeChart.js';
-import Booking from './Booking.js';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/concierge.jpg'
 
@@ -121,7 +120,6 @@ $('#submit_book-room-button').on('click', function() {
   $('.div_available-rooms').remove();
   selectedDate = formatSelectedDate($('#select-date').val());
   let roomType = $('#select-room-type').val();
-  console.log(roomType);
   if (selectedDate !== '' ) {
     displayAvailableRooms(selectedDate, roomType);
   } else {
