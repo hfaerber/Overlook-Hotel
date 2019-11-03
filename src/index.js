@@ -157,7 +157,6 @@ function loadGuestPageDisplay() {
   $('.span_user-name').text(`${user.name}`);
   $('.span_user-first-name').text(`${user.name.split(' ')[0]}`);
   $('#guest-dashboard-spending').text(`${user.mySpending} points`);
-  console.log(user.myBookings);
   user.myBookings.forEach(booking => {
     $('#guest-dashboard-bookings').append(`
       <div class="div_guest-bookings"><h4>Confirmation Number: ${booking.id}</h4>

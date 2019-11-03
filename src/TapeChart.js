@@ -5,7 +5,7 @@ class TapeChart {
     this.bookings = bookings;
   }
 
-getAvailableRoomsByDate(date) {
+getAvailableRoomsByDate(date, roomType) {
     let availableByDate = this.rooms.reduce((acc, room) => {
       let bookingsByRoom = this.bookings.filter(booking =>
         Number(booking.roomNumber) === room.number);
@@ -15,6 +15,10 @@ getAvailableRoomsByDate(date) {
         return acc;
     }, [])
   return availableByDate;
+}
+
+filterByRoomType(roomList, roomType) {
+  return roomList.filter(room => room.roomType === roomType)
 }
 
 getOccupancy(date) {

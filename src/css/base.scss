@@ -65,6 +65,8 @@ h1 {
   position: relative;
   grid-area: main;
   padding: 15px;
+  height: 90vh;
+  overflow: scroll;
 }
 
 
@@ -137,8 +139,8 @@ input {
   overflow: scroll;
 }
 
-.div_available-room,
-.div_guest-bookings {
+.div_guest-bookings,
+.div_available-rooms {
   border: 2px solid black;
   padding: 10px;
   margin: 5px;

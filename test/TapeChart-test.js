@@ -188,6 +188,27 @@ describe('TapeChart', () => {
     expect(tapeChart.getAvailableRoomsByDate('2019/11/22').length).to.equal(17);
   })
 
+  it('should be able to filter rooms by room type', () => {
+    expect(tapeChart.filterByRoomType(tapeChart.rooms, 'suite')).to.eql([
+      {
+      number: 2,
+      roomType: "suite",
+      bidet: false,
+      bedSize: "full",
+      numBeds: 2,
+      costPerNight: 477.38
+      },
+      {
+      number: 10,
+      roomType: "suite",
+      bidet: false,
+      bedSize: "twin",
+      numBeds: 1,
+      costPerNight: 497.64
+      }
+    ])
+  })
+
   it('should calculate the occupany percentage for a given date', () => {
     expect(tapeChart.getOccupancy('2019/06/15')).to.equal(0);
     expect(tapeChart.getOccupancy('2019/11/22')).to.equal(15);
