@@ -1,4 +1,6 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
+@import 'variables';
+@import 'mixins';
 
 .clearfix:after {
     content: ' ';
@@ -12,20 +14,14 @@
   box-sizing: border-box;
 }
 
-$login-background: black;
-$login-font: #fff;
-$primary-background: white;
-$primary-font: black;
-
 %main-portal {
-  border: 2px solid black;
   float: right;
   position: relative;
   grid-area: main;
-  padding: 15px;
 }
 
 %body-portal {
+  background-color: $portal-background;
   display: grid;
   grid-template-areas:
     "aside header"
@@ -35,16 +31,13 @@ $primary-font: black;
 }
 
 %header-portal {
-  border: 2px solid pink;
+  text-align: center;
   float: right;
   grid-area: header;
 }
 
 %bookings-display {
-  border: 2px solid black;
-  padding: 10px;
-  margin: 5px;
-  background-color: $login-background;
+  background-color: grey;
   color: $login-font;
 }
 
@@ -67,12 +60,13 @@ img {
   display: inline;
 }
 
-header {
-  text-align: center;
-}
-
 h1 {
   font-size: 3em;
+}
+
+h2,
+h3 {
+  color: $accent-color;
 }
 
 .main_login-page {
@@ -94,6 +88,8 @@ button {
   cursor: pointer;
   font-size: 1.2em;
   border-radius: 3px;
+  @include border-base($accent-color);
+
   &:hover,
   &:focus {
     border: 2px solid blue;
@@ -101,7 +97,14 @@ button {
 }
 
 .button_new-search {
+  @include border-base($accent-color);
+
   width: 20%;
+}
+
+.submit_book-room {
+  @include border-base($accent-color);
+  // @include button-base();
 }
 
 form {
@@ -110,8 +113,10 @@ form {
 }
 
 input {
-  margin: 10px;
-  padding: 10px;
+  @include border-base($accent-color);
+
+  // margin: 10px;
+  // padding: 10px;
 }
 
 // GUEST PORTAL STYLING
@@ -121,18 +126,25 @@ input {
 
 .header_guest-page {
   @extend %header-portal;
-  h1,
-  h2 {
+  @include border-base($accent-color);
+  background-color: $primary-background;
+  h1 {
     margin: 20px;
+    color: $accent-color;
   }
 }
 
 .aside_guest-page {
+  @include border-base($accent-color);
+  background-color: $primary-background;
+
   grid-area: aside;
 }
 
 .main_guest-page {
+  @include border-base($accent-color);
   @extend %main-portal;
+  background-color: $primary-background;
   height: 90vh;
   overflow: scroll;
 }
@@ -140,14 +152,20 @@ input {
 .guest-dashboard-booking-list {
   height: 90vh;
   overflow: scroll;
+  border-left: 0;
+  border-right: 0;
 }
 
 .div_guest-bookings {
   @extend %bookings-display;
+  @include border-base($accent-color);
+
 }
 
 .div_available-rooms {
   @extend %rooms-display;
+  @include border-base($accent-color);
+
 }
 
 // MANAGER PORTAL STYLING
@@ -158,30 +176,44 @@ input {
 
 .header_manager-page {
   @extend %header-portal;
-  h1,
-  h2 {
-    margin: 20px;
+  @include border-base($accent-color);
+  background-color: $primary-background;
+
+  h1{
+    color: $accent-color;
   }
 }
 
 .aside_manager-page {
+  @include border-base($accent-color);
+  background-color: $primary-background;
   grid-area: aside;
+
 }
 
 .main_manager-page {
   @extend %main-portal;
+  background-color: $portal-background;
+  border: none;
+  padding: 0;
+  margin: 0;
   display: flex;
 }
 
 .div_main {
-  border: 2px solid rebeccapurple;
-  padding: 10px;
+  @include border-base($accent-color);
+  background-color: $primary-background;
+
   height: 90vh;
   overflow: scroll;
+  width: 50%;
+  text-align: center;
 }
 
 .div_selected-user-bookings {
   @extend %bookings-display;
+  @include border-base($accent-color);
+
 }
 
 .error-message,
@@ -190,22 +222,22 @@ input {
 }
 
 .div_dashboard {
+  @include border-base($accent-color);
+
   display: flex;
   flex-direction: column;
   text-align: center;
-  border: 2px solid lightblue;
-  padding: 15px;
-  border-radius: 4px;
 }
 
 .section_dashboard {
-  border: 2px solid lightgreen;
-  padding: 15px;
-  border-radius: 4px;
+  @include border-base($accent-color);
+  padding: 0;
 }
 
 .div_available-rooms {
   @extend %rooms-display;
+  @include border-base($accent-color);
+
 }
 
 .hide {

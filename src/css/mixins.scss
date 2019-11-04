@@ -1,0 +1,21 @@
+
+
+@mixin border-base($color) {
+  border-radius: 3px;
+  padding: 15px;
+  margin: 10px;
+  border: 2px solid $color;
+}
+
+@mixin button-base() {
+  width: 200px;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+// input search
+// input Date
+// select
+
+// input submit
+// button
