@@ -16,6 +16,7 @@ let booking;
 let tapeChart;
 let userLogin;
 let selectedDate;
+let selectedUser;
 
 let today = new Date();
 findTodaysDate();
@@ -149,9 +150,36 @@ $('#input_search-guest').on('keyup', function() {
   let foundUsers = tapeChart.findUserFromSearch('name', searchSoFar);
   if (foundUsers.length > 0 && searchSoFar.length > 0) {
     foundUsers.forEach(user => {
-      $('.ul_guest-search-matches').append(`<li>${user.name}</li>`)
+      $('.ul_guest-search-matches').append(
+        `<li class="li_guest-searched-name" data-guestname="${user.name}">
+        ${user.name}</li>`)
     })
   }
+})
+
+$('.ul_guest-search-matches').on('click', '.li_guest-searched-name', function() {
+  let userName = event.target.closest('.li_guest-searched-name').dataset.guestname;
+  $('.ul_guest-search-matches').html(event.target.closest('.li_guest-searched-name'));
+  let userInfo = tapeChart.findUser('name', userName)
+
+  selectedUser = new User(userInfo[0], tapeChart);
+
+  $('.span_selected-guest').text(`${selectedUser.name.split(' ')[0]}`)
+  $('.ul_guest-search-matches').append(`
+    <li class="selected-guest-spend">
+      ${selectedUser.name.split(' ')[0]}\'s Loyalty Points:
+      ${selectedUser.mySpending}</li></br><li class="selected-guest-bookings">
+        ${selectedUser.name.split(' ')[0]}\'s Bookings:</li>`)
+  selectedUser.myBookings.forEach(booking => {
+    $('.ul_guest-search-matches').append(`
+      <div class="div_selected-user-bookings"><h4>Confirmation Number: ${booking.id}</h4>
+      <p>${booking.date}</p><p>Room Number: ${booking.roomNumber}</p>
+      </div>
+      `)
+  })
+  // add booking for that user **which class?**
+  // delete booking for that user **tapeChart**
+
 })
 
 // HANDLERS

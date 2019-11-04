@@ -170,6 +170,18 @@ input {
 
 .main_manager-page {
   @extend %main-portal;
+  display: flex;
+}
+
+.div_main {
+  border: 2px solid rebeccapurple;
+  padding: 10px;
+  height: 90vh;
+  overflow: scroll;
+}
+
+.div_selected-user-bookings {
+  @extend %bookings-display;
 }
 
 .error-message,

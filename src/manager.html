@@ -26,40 +26,42 @@
 
 
     <main class="main_guest-page main_manager-page">
-      <label for="input_search-guest">Search For Guest</label>
-      <input type="search" id="input_search-guest" name="search-input">
-      <ul class="ul_guest-search-matches"></ul>
+      <div class="div_main div_left-main">
+        <h2><label for="input_search-guest">Search For Guest</label></h2>
+        <input type="search" id="input_search-guest" name="search-input">
+        <ul class="ul_guest-search-matches"></ul>
+      </div>
+      <div class="div_main div_right-main">
+        <h2>Book A Room For <span class="span_selected-guest">Selected Guest</span></h2>
 
-      <h2>Book Room For Selected Guest</h2>
+  <!-- input to search guest by nane and select guest-->
 
-<!-- input to search guest by nane and select guest-->
+        <label for="select-date">Select Date:</label>
+        <input type="date" id="select-date" name="select-date-to-book"
+          value="" min="2019/11/02" max="2021/06/01">
+        </br>
+        <label for="select-room-type">Room Type:</label>
+        <select class="select_room-type-picker" name="room-types"
+          id="select-room-type">
+          <option value="any">Any</option>
+          <option value="residential suite">Residential Suite</option>
+          <option value="suite">Suite</option>
+          <option value="junior suite">Junior Suite</option>
+          <option value="single room">Single Room</option>
+        </select>
 
-      <label for="select-date">Select Date:</label>
-      <input type="date" id="select-date" name="select-date-to-book"
-        value="" min="2019/11/02" max="2021/06/01">
+        </br>
 
-      <label for="select-room-type">Room Type:</label>
-      <select class="select_room-type-picker" name="room-types"
-        id="select-room-type">
-        <option value="any">Any</option>
-        <option value="residential suite">Residential Suite</option>
-        <option value="suite">Suite</option>
-        <option value="junior suite">Junior Suite</option>
-        <option value="single room">Single Room</option>
-      </select>
+        <input class="submit_book-room" type="submit" value="Find A Room"
+          id="submit_book-room-button">
 
-      </br>
+        <button class="button_new-search hide" id="button_new-search-guest">
+          New Search
+        </button>
 
-      <input class="submit_book-room" type="submit" value="Find A Room"
-        id="submit_book-room-button">
-
-      <button class="button_new-search hide" id="button_new-search-guest">
-        New Search
-      </button>
-
-      <p class="error_no-rooms hide">Our apologies, there are no rooms available for the room type or date selected.</p>
-      <p class="error_no-rooms hide">Please select another room type/date and try again.</p>
-
+        <p class="error_no-rooms hide">Our apologies, there are no rooms available for the room type or date selected.</p>
+        <p class="error_no-rooms hide">Please select another room type/date and try again.</p>
+      </div>
 
 
 

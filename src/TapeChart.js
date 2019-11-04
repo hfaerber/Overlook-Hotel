@@ -55,8 +55,16 @@ class TapeChart {
     return this.users.filter(user => user[metric] === spec);
   }
 
-// METHODS THAT MAYBE SHOULD BE IN A MANAGER CLASS IF I REFACTOR TO INCLUDE ONE
 
+// METHODS THAT MAYBE SHOULD BE IN A MANAGER CLASS IF I REFACTOR TO INCLUDE ONE
+  findUserFromSearch(metric, spec) {
+    return this.users.filter(user => user[metric].toLowerCase().includes(spec))
+  }
+
+  makeBooking (date, roomNumber) {
+    let numberRoomNumber = Number(roomNumber);
+    return { userID: this.id, date: date, roomNumber: numberRoomNumber};
+  }
 
 
 }
