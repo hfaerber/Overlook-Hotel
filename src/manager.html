@@ -3,26 +3,66 @@
   <head>
     <title>Overlook Hotel Manager Page</title>
   </head>
-  <body class="manager-page-body">
-    <header>
+  <body class="body_manager-page">
+    <header class="header_manager-page">
       <h1>Welcome Team Member</h1>
     </header>
-    <main>
-      <div class="div_dashboard">
-        <h2 class="dashboard-header">Today's Dashboard</h2>
-        <section class="section_dashboard">
-          <h3 class="dashboard-subheader">Occupancy</h3>
-          <p class="dashboard-text" id="manager-dashboard-occupancy"></p>
-        </section>
-        <section class="section_dashboard">
-          <h3 class="dashboard-subheader">Revenue</h3>
-          <p class="dashboard-text" id="manager-dashboard-revenue"></p>
-        </section>
-        <section class="section_dashboard">
-          <h3 class="dashboard-subheader">Availability</h3>
-          <p class="dashboard-text" id="manager-dashboard-availability"></p>
-        </section>
-      </div>
+
+    <aside class="aside_manager-page div_dashboard">
+      <h2 class="dashboard-header">Today's Dashboard</h2>
+      <section class="section_dashboard">
+        <h3 class="dashboard-subheader">Occupancy</h3>
+        <p class="dashboard-text" id="manager-dashboard-occupancy"></p>
+      </section>
+      <section class="section_dashboard">
+        <h3 class="dashboard-subheader">Revenue</h3>
+        <p class="dashboard-text" id="manager-dashboard-revenue"></p>
+      </section>
+      <section class="section_dashboard">
+        <h3 class="dashboard-subheader">Availability</h3>
+        <p class="dashboard-text" id="manager-dashboard-availability"></p>
+      </section>
+    </aside>
+
+
+    <main class="main_guest-page main_manager-page">
+      <label for="input_search-guest">Search For Guest</label>
+      <input type="search" id="input_search-guest" name="search-input">
+      <ul class="ul_guest-search-matches"></ul>
+
+      <h2>Book Room For Selected Guest</h2>
+
+<!-- input to search guest by nane and select guest-->
+
+      <label for="select-date">Select Date:</label>
+      <input type="date" id="select-date" name="select-date-to-book"
+        value="" min="2019/11/02" max="2021/06/01">
+
+      <label for="select-room-type">Room Type:</label>
+      <select class="select_room-type-picker" name="room-types"
+        id="select-room-type">
+        <option value="any">Any</option>
+        <option value="residential suite">Residential Suite</option>
+        <option value="suite">Suite</option>
+        <option value="junior suite">Junior Suite</option>
+        <option value="single room">Single Room</option>
+      </select>
+
+      </br>
+
+      <input class="submit_book-room" type="submit" value="Find A Room"
+        id="submit_book-room-button">
+
+      <button class="button_new-search hide" id="button_new-search-guest">
+        New Search
+      </button>
+
+      <p class="error_no-rooms hide">Our apologies, there are no rooms available for the room type or date selected.</p>
+      <p class="error_no-rooms hide">Please select another room type/date and try again.</p>
+
+
+
+
     </main>
   </body>
 </html>

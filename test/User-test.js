@@ -7,7 +7,6 @@ import bookingData from '../sampleData/sample-booking-data';
 
 import TapeChart from '../src/TapeChart';
 import User from '../src/User';
-import Booking from '../src/Booking';
 
 describe('User', () => {
 

@@ -17,18 +17,15 @@ $login-font: #fff;
 $primary-background: white;
 $primary-font: black;
 
-.login-page-body {
-  background-color: $login-background;
-  color: $login-font;
+%main-portal {
+  border: 2px solid black;
+  float: right;
+  position: relative;
+  grid-area: main;
+  padding: 15px;
 }
 
-.manager-page-body {
-  background-color: $primary-background;
-  color: $primary-font;
-}
-
-.body_guest-page {
-  @extend .manager-page-body;
+%body-portal {
   display: grid;
   grid-template-areas:
     "aside header"
@@ -37,42 +34,45 @@ $primary-font: black;
   grid-template-rows: 20% 80%;
 }
 
+%header-portal {
+  border: 2px solid pink;
+  float: right;
+  grid-area: header;
+}
+
+%bookings-display {
+  border: 2px solid black;
+  padding: 10px;
+  margin: 5px;
+  background-color: $login-background;
+  color: $login-font;
+}
+
+%rooms-display {
+  border: 2px solid black;
+  padding: 10px;
+  margin: 5px;
+  background-color: rebeccapurple;
+  color: $login-font;
+}
+
+// LOGIN PAGE STYLING
+.login-page-body {
+  background-color: $login-background;
+  color: $login-font;
+}
+
+img {
+  width: 75%;
+  display: inline;
+}
+
 header {
   text-align: center;
 }
 
 h1 {
   font-size: 3em;
-}
-
-.header_guest-page {
-  border: 2px solid pink;
-  float: right;
-  grid-area: header;
-  h1,
-  h2 {
-    margin: 20px;
-  }
-}
-
-.aside_guest-page{
-  grid-area: aside;
-}
-
-.main_guest-page {
-  border: 2px solid black;
-  float: right;
-  position: relative;
-  grid-area: main;
-  padding: 15px;
-  height: 90vh;
-  overflow: scroll;
-}
-
-
-img {
-  width: 75%;
-  display: inline;
 }
 
 .main_login-page {
@@ -114,6 +114,64 @@ input {
   padding: 10px;
 }
 
+// GUEST PORTAL STYLING
+.body_guest-page {
+  @extend %body-portal;
+}
+
+.header_guest-page {
+  @extend %header-portal;
+  h1,
+  h2 {
+    margin: 20px;
+  }
+}
+
+.aside_guest-page {
+  grid-area: aside;
+}
+
+.main_guest-page {
+  @extend %main-portal;
+  height: 90vh;
+  overflow: scroll;
+}
+
+.guest-dashboard-booking-list {
+  height: 90vh;
+  overflow: scroll;
+}
+
+.div_guest-bookings {
+  @extend %bookings-display;
+}
+
+.div_available-rooms {
+  @extend %rooms-display;
+}
+
+// MANAGER PORTAL STYLING
+
+.body_manager-page {
+  @extend %body-portal;
+}
+
+.header_manager-page {
+  @extend %header-portal;
+  h1,
+  h2 {
+    margin: 20px;
+  }
+}
+
+.aside_manager-page {
+  grid-area: aside;
+}
+
+.main_manager-page {
+  @extend %main-portal;
+}
+
 .error-message,
 .error_no-rooms {
   color: red;
@@ -134,16 +192,8 @@ input {
   border-radius: 4px;
 }
 
-.guest-dashboard-booking-list {
-  height: 90vh;
-  overflow: scroll;
-}
-
-.div_guest-bookings,
 .div_available-rooms {
-  border: 2px solid black;
-  padding: 10px;
-  margin: 5px;
+  @extend %rooms-display;
 }
 
 .hide {
