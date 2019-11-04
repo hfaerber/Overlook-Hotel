@@ -117,8 +117,9 @@ $('#submit_team-member').on('click', function(event) {
   }
 })
 
-$('#submit_book-room-button').on('click', function(event) {
+$('#button_find-room-js').on('click', function(event) {
   $('.div_available-rooms').remove();
+  $('.error_no-rooms').addClass('hide');
   selectedDate = formatSelectedDate($('#select-date').val());
   let roomType = $('#select-room-type').val();
   if (selectedDate !== ''
@@ -128,16 +129,16 @@ $('#submit_book-room-button').on('click', function(event) {
     && event.target.parentNode.parentNode.classList.contains('main_manager')) {
       displayAvailableRooms(selectedDate, roomType, '.div_right-main')
   } else {
-    $('#submit_book-room-button, .button_new-search, .error_no-rooms')
-      .toggleClass('hide');
+    $('.error_no-rooms')
+      .removeClass('hide');
   }
 })
 
-$('.button_new-search').on('click', function() {
+$('.button_clear-search').on('click', function() {
+  $('.div_available-rooms').remove();
   $('#select-date').val('');
   $('#select-room-type').val('any');
-  $('#submit_book-room-button, .button_new-search, .error_no-rooms')
-    .toggleClass('hide');
+  $('.error_no-rooms').addClass('hide');
 })
 
 $('.main_portal-page').on('click', '.div_available-rooms', function(event) {
@@ -218,8 +219,8 @@ function isolateUserID(userLogin) {
 function displayAvailableRooms(date, roomType, where) {
   let availableRooms = tapeChart.getAvailableRooms(date, roomType);
   if (availableRooms.length === 0) {
-    $('#submit_book-room-button, .button_new-search, .error_no-rooms')
-      .toggleClass('hide')
+    $('.error_no-rooms')
+      .removeClass('hide')
   } else {
     availableRooms.forEach(room => {
       $(where).append(
