@@ -122,10 +122,10 @@ $('#submit_book-room-button').on('click', function(event) {
   selectedDate = formatSelectedDate($('#select-date').val());
   let roomType = $('#select-room-type').val();
   if (selectedDate !== ''
-    && event.target.parentNode.parentNode.classList.contains('main_test-class')) {
-      displayAvailableRooms(selectedDate, roomType, '.main_guest-page');
+    && event.target.parentNode.classList.contains('main_guest')) {
+      displayAvailableRooms(selectedDate, roomType, '.main_guest');
   } else if (selectedDate !== ''
-    && event.target.parentNode.parentNode.classList.contains('main_manager-page')) {
+    && event.target.parentNode.parentNode.classList.contains('main_manager')) {
       displayAvailableRooms(selectedDate, roomType, '.div_right-main')
   } else {
     $('#submit_book-room-button, .button_new-search, .error_no-rooms')
@@ -140,7 +140,7 @@ $('.button_new-search').on('click', function() {
     .toggleClass('hide');
 })
 
-$('.main_guest-page').on('click', '.div_available-rooms', function(event) {
+$('.main_portal-page').on('click', '.div_available-rooms', function(event) {
   event.preventDefault();
   let postBody = user.makeBooking(selectedDate,
     event.target.closest('.div_available-rooms').dataset.roomnumber);
