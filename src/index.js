@@ -123,10 +123,10 @@ $('#submit_book-room-button').on('click', function(event) {
   let roomType = $('#select-room-type').val();
   if (selectedDate !== ''
     && event.target.parentNode.parentNode.classList.contains('main_test-class')) {
-      displayAvailableRooms(selectedDate, roomType);
+      displayAvailableRooms(selectedDate, roomType, '.main_guest-page');
   } else if (selectedDate !== ''
     && event.target.parentNode.parentNode.classList.contains('main_manager-page')) {
-      displayManagerAvailableRooms(selectedDate, roomType)
+      displayAvailableRooms(selectedDate, roomType, '.div_right-main')
   } else {
     $('#submit_book-room-button, .button_new-search, .error_no-rooms')
       .toggleClass('hide');
@@ -215,32 +215,14 @@ function isolateUserID(userLogin) {
   return Number(splitUserLogin[1]);
 }
 
-function displayAvailableRooms(date, roomType) {
+function displayAvailableRooms(date, roomType, where) {
   let availableRooms = tapeChart.getAvailableRooms(date, roomType);
   if (availableRooms.length === 0) {
     $('#submit_book-room-button, .button_new-search, .error_no-rooms')
       .toggleClass('hide')
   } else {
     availableRooms.forEach(room => {
-      $('.main_guest-page').append(
-        `<div class="div_available-rooms" data-roomnumber="${room.number}">
-        <h4>Room Type: ${room.roomType}</h4>
-        <p>Beds: ${room.numBeds} ${room.bedSize} size</p>
-        <p>Room Number: ${room.number}</p>
-        <p>Cost: $${room.costPerNight}</p>
-        </div>`)
-    })
-  }
-}
-
-function displayManagerAvailableRooms(date, roomType) {
-  let availableRooms = tapeChart.getAvailableRooms(date, roomType);
-  if (availableRooms.length === 0) {
-    $('#submit_book-room-button, .button_new-search, .error_no-rooms')
-      .toggleClass('hide')
-  } else {
-    availableRooms.forEach(room => {
-      $('.div_right-main').append(
+      $(where).append(
         `<div class="div_available-rooms" data-roomnumber="${room.number}">
         <h4>Room Type: ${room.roomType}</h4>
         <p>Beds: ${room.numBeds} ${room.bedSize} size</p>
