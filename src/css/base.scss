@@ -141,7 +141,7 @@ input {
   grid-area: aside;
 }
 
-.main_guest-page {
+.main_guest {
   @include border-base($accent-color);
   @extend %main-portal;
   background-color: $primary-background;
@@ -191,7 +191,7 @@ input {
 
 }
 
-.main_manager-page {
+.main_manager {
   @extend %main-portal;
   background-color: $portal-background;
   border: none;
@@ -216,8 +216,7 @@ input {
 
 }
 
-.error-message,
-.error_no-rooms {
+.error {
   color: red;
 }
 
