@@ -16,7 +16,7 @@ let booking;
 let tapeChart;
 let userLogin;
 let selectedDate;
-let selectedUser;
+let selectedUser = null;
 
 let today = new Date();
 findTodaysDate();
@@ -83,6 +83,8 @@ function postNewBooking(postBody) {
 }
 
 // EVENT LISTENERS
+
+// LOGIN PAGE EVENT LISTENERS
 $('#button_guest-login').on('click', function() {
   $('#form_guest-login').toggleClass('hide');
   $('#button_team-member-login').toggleClass('hide');
@@ -117,6 +119,8 @@ $('#submit_team-member').on('click', function(event) {
   }
 })
 
+// PORTAL PAGES EVENT LISTENERS
+
 $('#button_find-room-js').on('click', function(event) {
   $('.div_available-rooms').remove();
   $('.error_no-rooms').addClass('hide');
@@ -129,8 +133,7 @@ $('#button_find-room-js').on('click', function(event) {
     && event.target.parentNode.parentNode.classList.contains('main_manager')) {
       displayAvailableRooms(selectedDate, roomType, '.div_right-main')
   } else {
-    $('.error_no-rooms')
-      .removeClass('hide');
+    $('.error_no-rooms').removeClass('hide');
   }
 })
 
@@ -141,15 +144,28 @@ $('.button_clear-search').on('click', function() {
   $('.error_no-rooms').addClass('hide');
 })
 
+// CREATE AND POST NEW BOOKING FOR USER
 $('.main_portal-page').on('click', '.div_available-rooms', function(event) {
   event.preventDefault();
-  let postBody = user.makeBooking(selectedDate,
-    event.target.closest('.div_available-rooms').dataset.roomnumber);
-  postNewBooking(postBody);
-  $(event.target.closest('.div_available-rooms')).remove();
+  let postBody;
+  if (event.target.closest('.div_available-rooms').parentNode.classList.contains('main_guest')) {
+    postBody = user.makeBooking(selectedDate,
+      event.target.closest('.div_available-rooms').dataset.roomnumber);
+    postNewBooking(postBody);
+    $(event.target.closest('.div_available-rooms')).remove();
+  } else if (selectedUser !== null && event.target.closest('.div_available-rooms').parentNode.parentNode.classList.contains('main_manager')) {
+    postBody = selectedUser.makeBooking(selectedDate,
+      event.target.closest('.div_available-rooms').dataset.roomnumber);
+    postNewBooking(postBody);
+    $(event.target.closest('.div_available-rooms')).remove();
+  } else {
+    $('.error_select-guest').removeClass('hide');
+  }
 })
 
+// SEARCH USERS BY NAME
 $('#input_search-guest').on('keyup', function() {
+  $('.error_select-guest').addClass('hide');
   let searchSoFar = $('#input_search-guest').val().toLowerCase();
   $('.ul_guest-search-matches').html('');
   let foundUsers = tapeChart.findUserFromSearch('name', searchSoFar);
@@ -162,6 +178,7 @@ $('#input_search-guest').on('keyup', function() {
   }
 })
 
+// SELECT GUEST FROM SEARCH, INSTANTIATE GUEST AND LOAD THEIR STUFF
 $('.ul_guest-search-matches').on('click', '.li_guest-searched-name', function() {
   let userName = event.target.closest('.li_guest-searched-name').dataset.guestname;
   $('.ul_guest-search-matches').html(event.target.closest('.li_guest-searched-name'));
