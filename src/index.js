@@ -143,6 +143,17 @@ $('.main_guest-page').on('click', '.div_available-rooms', function(event) {
   $(event.target.closest('.div_available-rooms')).remove();
 })
 
+$('#input_search-guest').on('keyup', function() {
+  let searchSoFar = $('#input_search-guest').val().toLowerCase();
+  $('.ul_guest-search-matches').html('');
+  let foundUsers = tapeChart.findUserFromSearch('name', searchSoFar);
+  if (foundUsers.length > 0 && searchSoFar.length > 0) {
+    foundUsers.forEach(user => {
+      $('.ul_guest-search-matches').append(`<li>${user.name}</li>`)
+    })
+  }
+})
+
 // HANDLERS
 
 function loadManagerPageDisplay() {
