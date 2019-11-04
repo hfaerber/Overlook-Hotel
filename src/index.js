@@ -117,12 +117,16 @@ $('#submit_team-member').on('click', function(event) {
   }
 })
 
-$('#submit_book-room-button').on('click', function() {
+$('#submit_book-room-button').on('click', function(event) {
   $('.div_available-rooms').remove();
   selectedDate = formatSelectedDate($('#select-date').val());
   let roomType = $('#select-room-type').val();
-  if (selectedDate !== '' ) {
-    displayAvailableRooms(selectedDate, roomType);
+  if (selectedDate !== ''
+    && event.target.parentNode.parentNode.classList.contains('main_test-class')) {
+      displayAvailableRooms(selectedDate, roomType);
+  } else if (selectedDate !== ''
+    && event.target.parentNode.parentNode.classList.contains('main_manager-page')) {
+      displayManagerAvailableRooms(selectedDate, roomType)
   } else {
     $('#submit_book-room-button, .button_new-search, .error_no-rooms')
       .toggleClass('hide');
@@ -219,6 +223,24 @@ function displayAvailableRooms(date, roomType) {
   } else {
     availableRooms.forEach(room => {
       $('.main_guest-page').append(
+        `<div class="div_available-rooms" data-roomnumber="${room.number}">
+        <h4>Room Type: ${room.roomType}</h4>
+        <p>Beds: ${room.numBeds} ${room.bedSize} size</p>
+        <p>Room Number: ${room.number}</p>
+        <p>Cost: $${room.costPerNight}</p>
+        </div>`)
+    })
+  }
+}
+
+function displayManagerAvailableRooms(date, roomType) {
+  let availableRooms = tapeChart.getAvailableRooms(date, roomType);
+  if (availableRooms.length === 0) {
+    $('#submit_book-room-button, .button_new-search, .error_no-rooms')
+      .toggleClass('hide')
+  } else {
+    availableRooms.forEach(room => {
+      $('.div_right-main').append(
         `<div class="div_available-rooms" data-roomnumber="${room.number}">
         <h4>Room Type: ${room.roomType}</h4>
         <p>Beds: ${room.numBeds} ${room.bedSize} size</p>
