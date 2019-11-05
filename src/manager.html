@@ -35,9 +35,11 @@
       <div class="div_main div_right-main">
         <h2>Cancel A Booking For <span class="span_selected-guest">Selected Guest</span></h2>
         <label for="input_cancel-booking">Conf # to Cancel:</label>
-        <input type="text" id="input_cancel-booking">
+        <input type="number" id="input_cancel-booking">
         <button class="button_cancel" id="button_cancel-js">
           Cancel Booking</button>
+        <p class="error error_wrong-conf hide">Invalid Confirmation Number. Please 
+          try again.</p>
         <h2>Book A Room For <span class="span_selected-guest">Selected Guest</span></h2>
         <label for="select-date">Select Date:</label>
         <input type="date" id="select-date" name="select-date-to-book"

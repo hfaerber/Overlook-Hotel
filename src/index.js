@@ -198,17 +198,38 @@ $('.ul_guest-search-matches').on('click', '.button_searched-user-name', function
         ${selectedUser.name.split(' ')[0]}\'s Bookings:</li>`)
   selectedUser.myBookings.forEach(booking => {
     $('.ul_guest-search-matches').append(`
-      <div class="div_selected-user-bookings" data-confirmation="${booking.id}">
+      <div class="div_selected-user-bookings" id="${booking.id}">
       <h4>${booking.date}</h4>
       <p>Confirmation: ${booking.id}</p>
       <p>Room Number: ${booking.roomNumber}</p>
       </div>
       `)
   })
-  // add booking for that user **which class?**
-  // delete booking for that user **tapeChart**
-
 })
+
+// delete booking for that user **tapeChart**
+$('#button_cancel-js').on('click', function() {
+  let confirmationNum = $('#input_cancel-booking').val();
+  if (selectedUser.getBookingIDs().includes(Number(confirmationNum))) {
+    $(`#${confirmationNum}`).append(`
+      <h4>BOOKING CANCELLED<h4>CANCELLATION # ${Date.now()}</h4>`);
+    $('.error_wrong-conf').addClass('hide');
+    $('#input_cancel-booking').val('');
+    $('#input_cancel-booking').attr("placeholder", confirmationNum);
+    // need to create post object and actually post it
+  } else {
+    $('.error_wrong-conf').removeClass('hide');
+  }
+})
+
+// click on cancel
+// grab value of conf input (as num or string??)
+// if it matches a dataset conf {}
+// find the div with the dataset-confirmation that matches
+// create delete obj
+// fetch delete that one
+// remove from displayed bookings (and updated user.myBookings somehow)
+// if it doesn't match display error
 
 // HANDLERS
 
