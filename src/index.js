@@ -211,16 +211,25 @@ $('.ul_guest-search-matches').on('click', '.button_searched-user-name', function
 $('#button_cancel-js').on('click', function() {
   let confirmationNum = $('#input_cancel-booking').val();
   if (selectedUser.getBookingIDs().includes(Number(confirmationNum))) {
-    $(`#${confirmationNum}`).append(`
-      <h4>BOOKING CANCELLED<h4>CANCELLATION # ${Date.now()}</h4>`);
-    $('.error_wrong-conf').addClass('hide');
-    $('#input_cancel-booking').val('');
-    $('#input_cancel-booking').attr("placeholder", confirmationNum);
+    displayCancel(confirmationNum);
+    // $(`#${confirmationNum}`).append(`
+    //   <h4>BOOKING CANCELLED<h4>CANCELLATION # ${Date.now()}</h4>`);
+    // $('.error_wrong-conf').addClass('hide');
+    // $('#input_cancel-booking').val('');
+    // $('#input_cancel-booking').attr("placeholder", confirmationNum);
     // need to create post object and actually post it
   } else {
     $('.error_wrong-conf').removeClass('hide');
   }
 })
+
+function displayCancel(confNum) {
+  $(`#${confNum}`).append(`
+    <h4>BOOKING CANCELLED<h4>CANCELLATION # ${Date.now()}</h4>`);
+  $('.error_wrong-conf').addClass('hide');
+  $('#input_cancel-booking').val('');
+  $('#input_cancel-booking').attr("placeholder", confNum);
+}
 
 // click on cancel
 // grab value of conf input (as num or string??)
