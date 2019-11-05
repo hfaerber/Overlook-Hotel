@@ -88,13 +88,13 @@ function postNewBooking(postBody) {
 $('#button_guest-login').on('click', function() {
   $('#form_guest-login').toggleClass('hide');
   $('#button_team-member-login').toggleClass('hide');
-  $('#error_team-member-login').addClass('hide');
+  $('#error_login-js').addClass('hide');
 })
 
 $('#button_team-member-login').on('click', function() {
   $('#form_team-member-login').toggleClass('hide');
   $('#button_guest-login').toggleClass('hide');
-  $('#error_team-member-login').addClass('hide');
+  $('#error_login-js').addClass('hide');
 })
 
 $('#submit_guest').on('click', function(event) {
@@ -105,7 +105,7 @@ $('#submit_guest').on('click', function(event) {
       localStorage.setItem('userLogin', userLogin);
       window.location = "./customer.html";
   } else {
-    $('#error_team-member-login').removeClass('hide');
+    $('#error_login-js').removeClass('hide');
   }
 })
 
@@ -115,7 +115,7 @@ $('#submit_team-member').on('click', function(event) {
     && $('#team-member-password').val() === 'overlook2019') {
     window.location = "./manager.html";
   } else {
-    $('#error_team-member-login').removeClass('hide');
+    $('#error_login-js').removeClass('hide');
   }
 })
 

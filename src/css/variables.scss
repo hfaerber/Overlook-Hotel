@@ -1,6 +1,6 @@
 $login-background: black;
 $login-font: #fff;
 $primary-background: white;
-$primary-font: black;
-$accent-color: #3D3795;
-$portal-background: #59B2C2
+$portal-background: #59B2C2;
+$accent-color: hsla(244, 46%, 40%, 1);
+$accent-color-light: lighten($accent-color, 50%);

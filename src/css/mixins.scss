@@ -8,9 +8,13 @@
 }
 
 @mixin button-base() {
-  width: 200px;
+  width: 175px;
   font-size: 1em;
   font-weight: bold;
+}
+
+@mixin focus-base() {
+  outline: $accent-color solid 4px;
 }
 
 // input search

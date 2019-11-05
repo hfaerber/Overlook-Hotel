@@ -37,16 +37,16 @@
 }
 
 %bookings-display {
-  background-color: grey;
-  color: $login-font;
+  background-color: $accent-color-light;
+  color: $accent-color;
 }
 
 %rooms-display {
   border: 2px solid black;
   padding: 10px;
   margin: 5px;
-  background-color: rebeccapurple;
-  color: $login-font;
+  background-color: $accent-color-light;
+  color: $accent-color;
 }
 
 // LOGIN PAGE STYLING
@@ -92,7 +92,7 @@ button {
 
   &:hover,
   &:focus {
-    border: 2px solid blue;
+    @include focus-base()
   }
 }
 
@@ -104,7 +104,7 @@ button {
 
 .submit_book-room {
   @include border-base($accent-color);
-  // @include button-base();
+  @include button-base();
 }
 
 form {
@@ -114,11 +114,16 @@ form {
 
 input {
   @include border-base($accent-color);
-
-  // margin: 10px;
-  // padding: 10px;
+  @include button-base();
+  &:hover,
+  &:focus {
+    @include focus-base()
+  }
 }
 
+label {
+  font-size: 1.4em;
+}
 // GUEST PORTAL STYLING
 .body_guest-page {
   @extend %body-portal;
@@ -147,6 +152,7 @@ input {
   background-color: $primary-background;
   height: 90vh;
   overflow: scroll;
+  text-align: center;
 }
 
 .guest-dashboard-booking-list {
@@ -230,14 +236,25 @@ input {
   }
 }
 
-.error_select-guest {
-  font-size: 2em;
-  font-weight: bold;
+select {
+  @include border-base($accent-color);
+  @include button-base();
+  margin: 10px;
+  height: 53px;
+  &:hover,
+  &:focus {
+    @include focus-base()
+  }
 }
 
 .error {
   color: red;
+  font-size: 1.3em;
+}
+
+.error_select-guest {
   font-size: 2em;
+  font-weight: bold;
 }
 
 .div_dashboard {
@@ -256,7 +273,6 @@ input {
 .div_available-rooms {
   @extend %rooms-display;
   @include border-base($accent-color);
-
 }
 
 .hide {
