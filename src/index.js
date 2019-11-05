@@ -198,7 +198,8 @@ $('.ul_guest-search-matches').on('click', '.button_searched-user-name', function
         ${selectedUser.name.split(' ')[0]}\'s Bookings:</li>`)
   selectedUser.myBookings.forEach(booking => {
     $('.ul_guest-search-matches').append(`
-      <div class="div_selected-user-bookings"><h4>${booking.date}</h4>
+      <div class="div_selected-user-bookings" data-confirmation="${booking.id}">
+      <h4>${booking.date}</h4>
       <p>Confirmation: ${booking.id}</p>
       <p>Room Number: ${booking.roomNumber}</p>
       </div>
@@ -213,7 +214,7 @@ $('.ul_guest-search-matches').on('click', '.button_searched-user-name', function
 
 function loadManagerPageDisplay() {
   $('#manager-dashboard-occupancy').text(`${tapeChart.getOccupancy(today)}%`);
-  $('#manager-dashboard-revenue').text(`$${tapeChart.getDaysRevenue(today)}`);
+  $('#manager-dashboard-revenue').text(`$${tapeChart.getDaysRevenue('date', today)}`);
   $('#manager-dashboard-availability').text
     (`${tapeChart.getAvailableRooms(today).length}`);
 }
