@@ -159,7 +159,11 @@ input {
 .div_guest-bookings {
   @extend %bookings-display;
   @include border-base($accent-color);
-
+  // h4,
+  // p {
+  //   margin: 0;
+  //   font-size: 1.7em;
+  // }
 }
 
 .div_available-rooms {
@@ -210,14 +214,30 @@ input {
   text-align: center;
 }
 
+.ul_guest-search-matches {
+  list-style: none;
+  font-size: 1.6em;
+  padding: 0;
+}
+
 .div_selected-user-bookings {
   @extend %bookings-display;
   @include border-base($accent-color);
+  h4,
+  p {
+    margin: 8px;
+    font-size: .7em;
+  }
+}
 
+.error_select-guest {
+  font-size: 2em;
+  font-weight: bold;
 }
 
 .error {
   color: red;
+  font-size: 2em;
 }
 
 .div_dashboard {
