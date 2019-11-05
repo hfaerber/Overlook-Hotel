@@ -79,6 +79,7 @@ function postNewBooking(postBody) {
     body: JSON.stringify(postBody)
   })
   .then(response => console.log('GREATSUCCESS!', response))
+  // .then(showConfirmation(postBody.roomNumber))
   .catch(error => console.log('postError', error))
 }
 
@@ -137,8 +138,6 @@ $('#button_find-room-js').on('click', function(event) {
   }
 })
 
-// if (window.location.pathname === './customer.html')
-
 $('.button_clear-search').on('click', function() {
   $('.div_available-rooms').remove();
   $('#select-date').val('');
@@ -153,11 +152,17 @@ $('.main_portal-page').on('click', '.button_book-now', function(event) {
   if (window.location.pathname === '/customer.html') {
     postBody = user.makeBooking(selectedDate, roomNum);
     postNewBooking(postBody);
-    $(this).closest('.div_available-rooms').remove();
+    $(this).closest('.div_available-rooms').html('Booking Successful!');
+    // setTimeout(function(){
+    //   $(this).closest('.div_available-rooms').remove();
+    // }, 2500);
   } else if (selectedUser !== null && window.location.pathname === '/manager.html') {
     postBody = selectedUser.makeBooking(selectedDate, roomNum);
     postNewBooking(postBody);
-    $(this).closest('.div_available-rooms').remove();
+    $(this).closest('.div_available-rooms').html('Booking Successful!');
+    // setTimeout(function(){
+    //   $(this).closest('.div_available-rooms').remove();
+    // }, 2500);
   } else {
     $('.error_select-guest').removeClass('hide');
   }
@@ -255,3 +260,7 @@ function displayAvailableRooms(date, roomType, where) {
     })
   }
 }
+
+// function showConfirmation(postBody) {
+//   window.alert('Booking successful! ' + postBody);
+// }

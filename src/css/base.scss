@@ -291,3 +291,43 @@ select {
 .hide {
   display: none;
 }
+
+@media screen and (max-width: 650px) {
+  // %body-portal {
+  //   background-color: $portal-background;
+  //   display: grid;
+  //   grid-template-areas:
+  //     "header header"
+  //     "aside aside"
+  //     "main main";
+  //   grid-template-columns: 30% 70%;
+  //   grid-template-rows: 15% 61%;
+  // }
+
+  .aside_manager-page {
+    @include border-base($accent-color);
+    background-color: $primary-background;
+    grid-area: aside;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 20%;
+  }
+
+  .section_dashboard {
+    width: 23%;
+  }
+
+  .body_manager-page {
+    background-color: $portal-background;
+    display: grid;
+    grid-template-areas:
+      "header header"
+      "aside aside"
+      "main main";
+    grid-template-columns: 30% 70%;
+    grid-template-rows: 15% 61%;
+  }
+
+}
