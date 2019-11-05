@@ -29,6 +29,10 @@ class User {
     return { userID: this.id, date: date, roomNumber: numberRoomNumber};
   }
 
+  getBookingIDs() {
+    return this.myBookings.map(booking => booking.id)
+  }
+
 }
 
 export default User;

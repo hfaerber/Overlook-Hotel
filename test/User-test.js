@@ -54,4 +54,8 @@ describe('User', () => {
       })
   })
 
+  it('should be able to get a list of just their booking ids', () => {
+    expect(user.getBookingIDs()).to.eql([1572293130160]);
+  })
+
 })
