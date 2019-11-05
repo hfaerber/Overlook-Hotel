@@ -152,21 +152,28 @@ $('.main_portal-page').on('click', '.button_book-now', function(event) {
   if (window.location.pathname === '/customer.html') {
     postBody = user.makeBooking(selectedDate, roomNum);
     postNewBooking(postBody);
-    $(this).closest('.div_available-rooms').html('Booking Successful!');
-    // setTimeout(function(){
-    //   $(this).closest('.div_available-rooms').remove();
-    // }, 2500);
+    let jThis = $(this);
+    stuffToDoAfterBooking(jThis);
+
   } else if (selectedUser !== null && window.location.pathname === '/manager.html') {
     postBody = selectedUser.makeBooking(selectedDate, roomNum);
     postNewBooking(postBody);
     $(this).closest('.div_available-rooms').html('Booking Successful!');
     // setTimeout(function(){
-    //   $(this).closest('.div_available-rooms').remove();
+      $(this).closest('.div_available-rooms').remove();
     // }, 2500);
   } else {
     $('.error_select-guest').removeClass('hide');
   }
 })
+
+function stuffToDoAfterBooking(param) {
+  param.closest('.div_available-rooms').addClass('toRemove');
+  param.closest('.div_available-rooms').html('Booking Successful!');
+  setTimeout(function(){
+    $('.toRemove').remove();
+  }, 2500);
+}
 
 // SEARCH USERS BY NAME
 $('#input_search-guest').on('keyup', function() {
