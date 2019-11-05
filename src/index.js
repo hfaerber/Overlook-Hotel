@@ -127,15 +127,17 @@ $('#button_find-room-js').on('click', function(event) {
   selectedDate = formatSelectedDate($('#select-date').val());
   let roomType = $('#select-room-type').val();
   if (selectedDate !== ''
-    && event.target.parentNode.classList.contains('main_guest')) {
+    && window.location.pathname === '/customer.html') {
       displayAvailableRooms(selectedDate, roomType, '.main_guest');
   } else if (selectedDate !== ''
-    && event.target.parentNode.parentNode.classList.contains('main_manager')) {
+    && window.location.pathname === '/manager.html') {
       displayAvailableRooms(selectedDate, roomType, '.div_right-main')
   } else {
     $('.error_no-rooms').removeClass('hide');
   }
 })
+
+// if (window.location.pathname === './customer.html')
 
 $('.button_clear-search').on('click', function() {
   $('.div_available-rooms').remove();
@@ -145,19 +147,17 @@ $('.button_clear-search').on('click', function() {
 })
 
 // CREATE AND POST NEW BOOKING FOR USER
-$('.main_portal-page').on('click', '.div_available-rooms', function(event) {
-  event.preventDefault();
+$('.main_portal-page').on('click', '.button_book-now', function(event) {
   let postBody;
-  if (event.target.closest('.div_available-rooms').parentNode.classList.contains('main_guest')) {
-    postBody = user.makeBooking(selectedDate,
-      event.target.closest('.div_available-rooms').dataset.roomnumber);
+  let roomNum = $(this).data('roomnumber');
+  if (window.location.pathname === '/customer.html') {
+    postBody = user.makeBooking(selectedDate, roomNum);
     postNewBooking(postBody);
-    $(event.target.closest('.div_available-rooms')).remove();
-  } else if (selectedUser !== null && event.target.closest('.div_available-rooms').parentNode.parentNode.classList.contains('main_manager')) {
-    postBody = selectedUser.makeBooking(selectedDate,
-      event.target.closest('.div_available-rooms').dataset.roomnumber);
+    $(this).closest('.div_available-rooms').remove();
+  } else if (selectedUser !== null && window.location.pathname === '/manager.html') {
+    postBody = selectedUser.makeBooking(selectedDate, roomNum);
     postNewBooking(postBody);
-    $(event.target.closest('.div_available-rooms')).remove();
+    $(this).closest('.div_available-rooms').remove();
   } else {
     $('.error_select-guest').removeClass('hide');
   }
@@ -165,6 +165,8 @@ $('.main_portal-page').on('click', '.div_available-rooms', function(event) {
 
 // SEARCH USERS BY NAME
 $('#input_search-guest').on('keyup', function() {
+  selectedUser = null;
+  $('.ul_guest-search-matches').html('')
   $('.error_select-guest').addClass('hide');
   let searchSoFar = $('#input_search-guest').val().toLowerCase();
   $('.ul_guest-search-matches').html('');
@@ -180,8 +182,9 @@ $('#input_search-guest').on('keyup', function() {
 
 // SELECT GUEST FROM SEARCH, INSTANTIATE GUEST AND LOAD THEIR STUFF
 $('.ul_guest-search-matches').on('click', '.li_guest-searched-name', function() {
-  let userName = event.target.closest('.li_guest-searched-name').dataset.guestname;
-  $('.ul_guest-search-matches').html(event.target.closest('.li_guest-searched-name'));
+  $('.error_select-guest').addClass('hide');
+  let userName = $(this).data('guestname');
+  $('.ul_guest-search-matches').html($(this));
   let userInfo = tapeChart.findUser('name', userName)
 
   selectedUser = new User(userInfo[0], tapeChart);
@@ -194,8 +197,9 @@ $('.ul_guest-search-matches').on('click', '.li_guest-searched-name', function() 
         ${selectedUser.name.split(' ')[0]}\'s Bookings:</li>`)
   selectedUser.myBookings.forEach(booking => {
     $('.ul_guest-search-matches').append(`
-      <div class="div_selected-user-bookings"><h4>Confirmation Number: ${booking.id}</h4>
-      <p>${booking.date}</p><p>Room Number: ${booking.roomNumber}</p>
+      <div class="div_selected-user-bookings"><h4>${booking.date}</h4>
+      <p>Confirmation: ${booking.id}</p>
+      <p>Room Number: ${booking.roomNumber}</p>
       </div>
       `)
   })
@@ -222,8 +226,8 @@ function loadGuestPageDisplay() {
   $('#guest-dashboard-spending').text(`${user.mySpending} points`);
   user.myBookings.forEach(booking => {
     $('#guest-dashboard-bookings').append(`
-      <div class="div_guest-bookings"><h4>Confirmation Number: ${booking.id}</h4>
-      <p>${booking.date}</p><p>Room Number: ${booking.roomNumber}</p>
+      <div class="div_guest-bookings"><h4>CONFIRMATION NUMBER: ${booking.id}</h4>
+      <p>${booking.date}</p><p>ROOM NUMBER: ${booking.roomNumber}</p>
       </div>`)
   })
 }
@@ -241,11 +245,12 @@ function displayAvailableRooms(date, roomType, where) {
   } else {
     availableRooms.forEach(room => {
       $(where).append(
-        `<div class="div_available-rooms" data-roomnumber="${room.number}">
-        <h4>Room Type: ${room.roomType}</h4>
-        <p>Beds: ${room.numBeds} ${room.bedSize} size</p>
-        <p>Room Number: ${room.number}</p>
-        <p>Cost: $${room.costPerNight}</p>
+        `<div class="div_available-rooms">
+        <h4>ROOM TYPE: ${room.roomType}</h4>
+        <p>BEDS: ${room.numBeds} ${room.bedSize} size</p>
+        <p>ROOM NUMBER: ${room.number}</p>
+        <p>COST: $${room.costPerNight}</p>
+        <button class="button_book-now" data-roomnumber="${room.number}">BOOK NOW</button>
         </div>`)
     })
   }
