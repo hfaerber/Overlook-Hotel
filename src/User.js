@@ -24,13 +24,18 @@ class User {
     return this.mySpending;
   }
 
+  getBookingIDs() {
+    return this.myBookings.map(booking => booking.id)
+  }
+
   makeBooking (date, roomNumber) {
     let numberRoomNumber = Number(roomNumber);
     return { userID: this.id, date: date, roomNumber: numberRoomNumber};
   }
 
-  getBookingIDs() {
-    return this.myBookings.map(booking => booking.id)
+  deleteBooking(booking) {
+    let numberBooking = Number(booking);
+    return { id: numberBooking};
   }
 
 }

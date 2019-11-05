@@ -54,6 +54,10 @@ describe('User', () => {
       })
   })
 
+  it('should be able to delete bookings for themself', () => {
+    expect(user.deleteBooking(1572293130160)).to.eql({ id: 1572293130160 })
+  })
+
   it('should be able to get a list of just their booking ids', () => {
     expect(user.getBookingIDs()).to.eql([1572293130160]);
   })
