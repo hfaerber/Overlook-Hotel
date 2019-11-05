@@ -226,6 +226,19 @@ label {
   padding: 0;
 }
 
+.button_searched-user-name {
+  width: 80%;
+  cursor: pointer;
+  font-size: .7em;
+  padding: 5px;
+  margin: 5px;
+  border: 2px solid $accent-color;
+  &:hover,
+  &:focus {
+    @include focus-base()
+  }
+}
+
 .div_selected-user-bookings {
   @extend %bookings-display;
   @include border-base($accent-color);

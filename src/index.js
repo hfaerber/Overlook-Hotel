@@ -174,14 +174,14 @@ $('#input_search-guest').on('keyup', function() {
   if (foundUsers.length > 0 && searchSoFar.length > 0) {
     foundUsers.forEach(user => {
       $('.ul_guest-search-matches').append(
-        `<li class="li_guest-searched-name" data-guestname="${user.name}">
-        ${user.name}</li>`)
+        `<button class="button_searched-user-name" data-guestname="${user.name}">
+        ${user.name}</button>`)
     })
   }
 })
 
 // SELECT GUEST FROM SEARCH, INSTANTIATE GUEST AND LOAD THEIR STUFF
-$('.ul_guest-search-matches').on('click', '.li_guest-searched-name', function() {
+$('.ul_guest-search-matches').on('click', '.button_searched-user-name', function() {
   $('.error_select-guest').addClass('hide');
   let userName = $(this).data('guestname');
   $('.ul_guest-search-matches').html($(this));
