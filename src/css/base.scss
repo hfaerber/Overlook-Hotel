@@ -263,7 +263,6 @@ select {
 
 .div_dashboard {
   @include border-base($accent-color);
-
   display: flex;
   flex-direction: column;
   align-items: center;

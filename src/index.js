@@ -1,18 +1,11 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
-// An example of how you import jQuery into a JS file if you use jQuery in that file
 import $ from 'jquery';
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
 import User from './User.js';
 import TapeChart from './TapeChart.js';
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/concierge.jpg'
 
 // VARIABLE DECLARATIONS
 let user;
-let booking;
 let tapeChart;
 let userLogin;
 let selectedDate;
@@ -79,7 +72,6 @@ function postNewBooking(postBody) {
     body: JSON.stringify(postBody)
   })
   .then(response => console.log('GREATSUCCESS!', response))
-  // .then(showConfirmation(postBody.roomNumber))
   .catch(error => console.log('postError', error))
 }
 
@@ -98,7 +90,6 @@ function sendDeletedBooking(deleteBody) {
 }
 
 // EVENT LISTENERS
-
 // LOGIN PAGE EVENT LISTENERS
 $('#button_guest-login').on('click', function() {
   $('#form_guest-login').toggleClass('hide');
@@ -177,7 +168,6 @@ $('.main_portal-page').on('click', '.button_book-now', function(event) {
   }
 })
 
-
 // SEARCH USERS BY NAME
 $('#input_search-guest').on('keyup', function() {
   selectedUser = null;
@@ -221,7 +211,7 @@ $('.ul_guest-search-matches').on('click', '.button_searched-user-name', function
   })
 })
 
-// delete booking for that user **tapeChart**
+// DELETE BOOKING EVENT LISTENER
 $('#button_cancel-js').on('click', function() {
   let confirmationNum = $('#input_cancel-booking').val();
   if (selectedUser.getBookingIDs().includes(Number(confirmationNum))) {
@@ -241,20 +231,12 @@ function displayCancel(confNum) {
   $('#input_cancel-booking').attr("placeholder", confNum);
 }
 
-// click on cancel
-// grab value of conf input (as num or string??)
-// if it matches a dataset conf {}
-// find the div with the dataset-confirmation that matches
-// create delete obj
-// fetch delete that one
-// remove from displayed bookings (and updated user.myBookings somehow)
-// if it doesn't match display error
-
 // HANDLERS
 
 function loadManagerPageDisplay() {
   $('#manager-dashboard-occupancy').text(`${tapeChart.getOccupancy(today)}%`);
-  $('#manager-dashboard-revenue').text(`$${tapeChart.getDaysRevenue('date', today)}`);
+  $('#manager-dashboard-revenue').text
+    (`$${tapeChart.getDaysRevenue('date', today)}`);
   $('#manager-dashboard-availability').text
     (`${tapeChart.getAvailableRooms(today).length}`);
 }
