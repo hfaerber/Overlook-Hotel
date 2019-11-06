@@ -158,11 +158,11 @@ $('.main_portal-page').on('click', '.button_book-now', function(event) {
   if (window.location.pathname === '/customer.html') {
     postBody = user.makeBooking(selectedDate, roomNum);
     postNewBooking(postBody);
-    stuffToDoAfterBooking(captureThis);
+    displayBookingSuccess(captureThis);
   } else if (selectedUser !== null && window.location.pathname === '/manager.html') {
     postBody = selectedUser.makeBooking(selectedDate, roomNum);
     postNewBooking(postBody);
-    stuffToDoAfterBooking(captureThis);
+    displayBookingSuccess(captureThis);
   } else {
     $('.error_select-guest').removeClass('hide');
   }
@@ -223,15 +223,7 @@ $('#button_cancel-js').on('click', function() {
   }
 })
 
-function displayCancel(confNum) {
-  $(`#${confNum}`).append(`
-    <h4>BOOKING CANCELLED<h4>CANCELLATION # ${Date.now()}</h4>`);
-  $('.error_wrong-conf').addClass('hide');
-  $('#input_cancel-booking').val('');
-  $('#input_cancel-booking').attr("placeholder", confNum);
-}
-
-// HANDLERS
+// HANDLERS AND HELPERS
 
 function loadManagerPageDisplay() {
   $('#manager-dashboard-occupancy').text(`${tapeChart.getOccupancy(today)}%`);
@@ -280,11 +272,18 @@ function displayAvailableRooms(date, roomType, where) {
   }
 }
 
-
-function stuffToDoAfterBooking(param) {
+function displayBookingSuccess(param) {
   param.closest('.div_available-rooms').addClass('toRemove');
   param.closest('.div_available-rooms').html('Booking Successful!');
   setTimeout(function(){
     $('.toRemove').remove();
   }, 2500);
+}
+
+function displayCancel(confNum) {
+  $(`#${confNum}`).append(`
+    <h4>BOOKING CANCELLED<h4>CANCELLATION # ${Date.now()}</h4>`);
+  $('.error_wrong-conf').addClass('hide');
+  $('#input_cancel-booking').val('');
+  $('#input_cancel-booking').attr("placeholder", confNum);
 }
