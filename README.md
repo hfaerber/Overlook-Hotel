@@ -33,3 +33,6 @@ This project implements jQuery, Sass, fetch API, and Webpack.
 ![guest-page](https://user-images.githubusercontent.com/48163945/68256119-0d97d400-0027-11ea-8768-b21c6bd42776.png)
 
 ![manager-page](https://user-images.githubusercontent.com/48163945/68256171-35873780-0027-11ea-9900-0a8517cf56a7.png)
+
+### Photo Credit
+Login Page Image courtesy of Ryan Dearth Photography
