@@ -83,6 +83,20 @@ function postNewBooking(postBody) {
   .catch(error => console.log('postError', error))
 }
 
+// DELETE
+function sendDeletedBooking(deleteBody) {
+  fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings',
+  {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': "application/json"
+    },
+    body: JSON.stringify(deleteBody)
+  })
+  .then(response => console.log('DELETE SUCCESS', response))
+  .catch(error => console.log('DELETE ERR', error))
+}
+
 // EVENT LISTENERS
 
 // LOGIN PAGE EVENT LISTENERS
@@ -211,13 +225,9 @@ $('.ul_guest-search-matches').on('click', '.button_searched-user-name', function
 $('#button_cancel-js').on('click', function() {
   let confirmationNum = $('#input_cancel-booking').val();
   if (selectedUser.getBookingIDs().includes(Number(confirmationNum))) {
+    let deleteBody = tapeChart.deleteBooking(confirmationNum);
+    sendDeletedBooking(deleteBody);
     displayCancel(confirmationNum);
-    // $(`#${confirmationNum}`).append(`
-    //   <h4>BOOKING CANCELLED<h4>CANCELLATION # ${Date.now()}</h4>`);
-    // $('.error_wrong-conf').addClass('hide');
-    // $('#input_cancel-booking').val('');
-    // $('#input_cancel-booking').attr("placeholder", confirmationNum);
-    // need to create post object and actually post it
   } else {
     $('.error_wrong-conf').removeClass('hide');
   }

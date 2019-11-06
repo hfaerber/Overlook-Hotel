@@ -33,11 +33,6 @@ class User {
     return { userID: this.id, date: date, roomNumber: numberRoomNumber};
   }
 
-  deleteBooking(booking) {
-    let numberBooking = Number(booking);
-    return { id: numberBooking};
-  }
-
 }
 
 export default User;
