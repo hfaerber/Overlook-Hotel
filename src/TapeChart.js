@@ -27,7 +27,7 @@ class TapeChart {
 
   getOccupancy(date) {
     return 100 - (this.getAvailableRooms(date).length
-      / this.rooms.length * 100);
+      / this.rooms.length * 100).toFixed();
   }
 
   filterBookingsByMetric(metric, spec) {
@@ -55,17 +55,14 @@ class TapeChart {
     return this.users.filter(user => user[metric] === spec);
   }
 
-
-// METHODS THAT MAYBE SHOULD BE IN A MANAGER CLASS IF I REFACTOR TO INCLUDE ONE
   findUserFromSearch(metric, spec) {
     return this.users.filter(user => user[metric].toLowerCase().includes(spec))
   }
 
-  makeBooking (date, roomNumber) {
-    let numberRoomNumber = Number(roomNumber);
-    return { userID: this.id, date: date, roomNumber: numberRoomNumber};
+  deleteBooking(booking) {
+    let numberBooking = Number(booking);
+    return { id: numberBooking };
   }
-
 
 }
 

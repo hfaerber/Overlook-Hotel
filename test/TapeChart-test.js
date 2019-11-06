@@ -405,4 +405,8 @@ describe('TapeChart', () => {
     ])
   })
 
+  it('should be able to delete bookings', () => {
+    expect(tapeChart.deleteBooking(1572293130160)).to.eql({ id: 1572293130160 })
+  })
+
 })
