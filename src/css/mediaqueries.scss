@@ -6,28 +6,28 @@
 
   .button_guest-login,
   .button_manager-login {
-    width: 40%;
     margin: 5px auto 5px auto;
+    width: 40%;
   }
 
   .div_button-container {
-    width: 100%;
     padding: 0;
+    width: 100%;
   }
 
   .img_background {
-    width: 90%;
     margin: 10px auto 10px auto;
+    width: 90%;
   }
 
   .aside_manager-page {
     @include border-base($accent-color);
+    align-items: center;
     background-color: $primary-background;
-    grid-area: aside;
     display: flex;
     flex-direction: row;
+    grid-area: aside;
     justify-content: space-between;
-    align-items: center;
   }
 
   .section_dashboard {
@@ -64,8 +64,8 @@
 
   .aside_guest-page {
     .section_dashboard {
-      width: 100%;
       margin: 3px;
+      width: 100%;
       .div_guest-bookings {
         margin: 3px;
       }
@@ -76,8 +76,8 @@
 @media screen and (max-width: 530px) {
   .button_guest-login,
   .button_manager-login {
-    width: 90%;
     margin: 5px auto 5px auto;
+    width: 90%;
   }
 
   .body_manager-page,
@@ -106,9 +106,9 @@
 
   .header_manager-page {
     h1 {
+      font-size: 2em;
       margin: 0;
       padding: 0;
-      font-size: 2em;
     }
   }
 
