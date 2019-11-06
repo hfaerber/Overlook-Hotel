@@ -1,5 +1,8 @@
 
 @media screen and (max-width: 875px) {
+  
+
+
 
   .aside_manager-page {
     @include border-base($accent-color);
@@ -26,31 +29,69 @@
     grid-template-rows: 15% 15% 70%;
   }
 
-}
+  .body_guest-page {
+    background-color: $portal-background;
+    display: grid;
+    grid-template-areas:
+      "header header"
+      "aside main";
+    grid-template-columns: 45% 55%;
+    grid-template-rows: 12% 88%;
+  }
 
-@media screen and (max-width: 530px) {
-  .aside_manager-page {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-  justify-content: space-between;
-    h2 {
-      width: 50%;
+  .header_guest-page {
+    h1 {
+      font-size: 2em;
+      margin: 0;
     }
   }
 
+  .aside_guest-page {
+    .section_dashboard {
+      width: 100%;
+      margin: 3px;
+      .div_guest-bookings {
+        margin: 3px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .body_manager-page,
+  .body_guest-page {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .main_manager {
+    display: flex;
+    flex-direction: column;
+    div {
+      width: 95%;
+    }
+  }
+
+  .aside_manager-page {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    h2 {
+      width: 90%;
+      margin: 0;
+    }
+  }
 
   .header_manager-page {
     h1 {
       margin: 0;
       padding: 0;
       font-size: 2em;
-
     }
   }
 
   .section_dashboard {
-    border: none;
+    width: 90%;
     h3,
     p {
       margin: 0;

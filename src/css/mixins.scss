@@ -11,15 +11,9 @@
   width: 175px;
   font-size: 1em;
   font-weight: bold;
+  cursor: pointer;
 }
 
 @mixin focus-base() {
   outline: $accent-color solid 4px;
 }
-
-// input search
-// input Date
-// select
-
-// input submit
-// button
