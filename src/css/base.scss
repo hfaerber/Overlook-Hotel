@@ -62,6 +62,7 @@ img {
 
 h1 {
   font-size: 3em;
+  text-align: center;
 }
 
 h2,
@@ -272,6 +273,7 @@ select {
 .section_dashboard {
   @include border-base($accent-color);
   padding: 5px;
+  width: 90%;
 }
 
 .div_available-rooms {

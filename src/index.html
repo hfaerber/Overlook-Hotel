@@ -4,42 +4,31 @@
     <title>Overlook Hotel Login Page</title>
   </head>
   <body class="login-page-body">
-    <header>
+    <header class="header_login-page">
       <h1>Welcome to the Overlook Hotel</h1>
     </header>
-  <main class="main_login-page">
-    <img src="./images/concierge.jpg" alt="concierge on phone behind desk">
-    <div class="div_button-container">
-      <form class="hide" id="form_guest-login">
-        <label for="guest-login">Guest Login</label>
-        <input type="text" id="guest-login" placeholder="Guest Login">
-        <label for="guest-password">Password</label>
-        <input type="password" id="guest-password">
-        <input type="submit" value="Login" id="submit_guest">
-      </form>
-
-
-      <button id="button_guest-login">
-        Guest Login
-      </button>
-
-      <form class="hide" id="form_team-member-login">
-        <label for="team-member-login">Team Member Login</label>
-        <input type="text" id="team-member-login" placeholder="Team Member Login">
-        <label for="team-member-password">Password</label>
-        <input type="password" id="team-member-password">
-        <input type="submit" value="Login" id="submit_team-member">
-      </form>
-      <p class="error error_login hide" id="error_login-js">
-        Login or password incorrect. Please try again.
-      </p>
-      <button id="button_team-member-login">
-        Team Member Login
-      </button>
-    </div>
-  </main>
-
-
-    <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
+    <main class="main_login-page">
+      <div class="div_button-container">
+        <form class="hide form_guest" id="form_guest-login">
+          <label for="guest-login">Guest Login</label>
+          <input type="text" id="guest-login" placeholder="Guest Login">
+          <label for="guest-password">Password</label>
+          <input type="password" id="guest-password">
+          <input type="submit" value="Login" id="submit_guest">
+        </form>
+        <button class="button_guest-login" id="button_guest-login">Guest Login</button>
+        <form class="hide form_manager" id="form_team-member-login">
+          <label for="team-member-login">Team Member Login</label>
+          <input type="text" id="team-member-login" placeholder="Team Member Login">
+          <label for="team-member-password">Password</label>
+          <input type="password" id="team-member-password">
+          <input type="submit" value="Login" id="submit_team-member">
+        </form>
+        <p class="error error_login hide" id="error_login-js">
+          Login or password incorrect. Please try again.</p>
+        <button class="button_manager-login"id="button_team-member-login">Team Member Login</button>
+      </div>
+      <img class="img_background"src="./images/concierge.jpg" alt="concierge on phone behind desk">
+    </main>
   </body>
 </html>

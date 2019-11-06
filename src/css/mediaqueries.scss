@@ -1,8 +1,24 @@
 
 @media screen and (max-width: 875px) {
-  
+  .main_login-page {
+    display: grid;
+  }
 
+  .button_guest-login,
+  .button_manager-login {
+    width: 40%;
+    margin: 5px auto 5px auto;
+  }
 
+  .div_button-container {
+    width: 100%;
+    padding: 0;
+  }
+
+  .img_background {
+    width: 90%;
+    margin: 10px auto 10px auto;
+  }
 
   .aside_manager-page {
     @include border-base($accent-color);
@@ -58,6 +74,12 @@
 }
 
 @media screen and (max-width: 530px) {
+  .button_guest-login,
+  .button_manager-login {
+    width: 90%;
+    margin: 5px auto 5px auto;
+  }
+
   .body_manager-page,
   .body_guest-page {
     display: flex;
@@ -97,5 +119,4 @@
       margin: 0;
     }
   }
-
 }
