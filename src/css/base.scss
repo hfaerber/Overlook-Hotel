@@ -78,7 +78,7 @@ h3 {
   flex-direction: column;
   justify-content: center;
   padding: 15px;
-  width: 23%;
+  width: 25%;
 }
 
 button {
@@ -125,9 +125,6 @@ label {
   font-size: 1.4em;
 }
 // GUEST PORTAL STYLING
-.body_guest-page {
-  @extend %body-portal;
-}
 
 .header_guest-page {
   @extend %header-portal;
@@ -180,7 +177,7 @@ label {
 
 // MANAGER PORTAL STYLING
 
-.body_manager-page {
+.body_portal {
   @extend %body-portal;
 }
 
@@ -292,41 +289,4 @@ select {
   display: none;
 }
 
-@media screen and (max-width: 790px) {
-  // %body-portal {
-  //   background-color: $portal-background;
-  //   display: grid;
-  //   grid-template-areas:
-  //     "header header"
-  //     "aside aside"
-  //     "main main";
-  //   grid-template-columns: 30% 70%;
-  //   grid-template-rows: 15% 61%;
-  // }
-
-  .aside_manager-page {
-    @include border-base($accent-color);
-    background-color: $primary-background;
-    grid-area: aside;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .section_dashboard {
-    width: 23%;
-  }
-
-  .body_manager-page {
-    background-color: $portal-background;
-    display: grid;
-    grid-template-areas:
-      "header header"
-      "aside aside"
-      "main main";
-    grid-template-columns: 50% 50%;
-    grid-template-rows: 15% 15% 70%;
-  }
-
-}
+@import 'mediaqueries';
