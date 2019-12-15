@@ -40,13 +40,13 @@ let bookingData =
   .catch(error => console.log('bookingData', error));
 
 let roomData =
-  fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms')
+  fetch('http://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms')
   .then(response => response.json())
   .then(data => data.rooms)
   .catch(error => console.log('roomData', error));
 
 let userData =
-  fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users')
+  fetch('http://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users')
   .then(response => response.json())
   .then(data => data.users)
   .catch(error => console.log('userData', error));
@@ -63,7 +63,7 @@ Promise.all([bookingData, roomData, userData]).then((promise) => {
 
 //  POST
 function postNewBooking(postBody) {
-  fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings',
+  fetch('http://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings',
   {
     method: 'POST',
     headers: {
@@ -77,7 +77,7 @@ function postNewBooking(postBody) {
 
 // DELETE
 function sendDeletedBooking(deleteBody) {
-  fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings',
+  fetch('http://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings',
   {
     method: 'DELETE',
     headers: {
