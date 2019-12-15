@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hfaerber/Overlook-Hotel.git",
+    "url": "git+http://github.com/hfaerber/Overlook-Hotel.git",
     "homepage": "http://hfaerber.github.io/Overlook-Hotel"
   },
   "author": "Turing School of Software and Design",
